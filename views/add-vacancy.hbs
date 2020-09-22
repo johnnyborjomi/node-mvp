@@ -1,0 +1,21 @@
+<h1>Add New Vacancy</h1>
+
+<form action="/add" method="POST">
+    <div class="input-field">
+        <input placeholder="Vacancy Title" name="vacancy_title" id="vacancy_title" type="text" required class="validate">
+        <label for="vacancy_title">Vacancy Title</label>
+        <span class="helper-text" data-error="Fill Title"></span>
+    </div>
+    <div class="input-field">
+        <input placeholder="Salary Range" name="salary_range" id="salary_range" type="text" required class="validate">
+        <label for="vacancy_title">Salary Range</label>
+        <span class="helper-text" data-error="Fill Salary Range"></span>
+    </div>
+    <div class="input-field">
+        <textarea placeholder="Vacancy Text" name="vacancy_text" id="vacancy_text" type="text" required class="validate materialize-textarea"></textarea>
+        <label for="vacancy_text">Vacancy Text</label>
+        <span class="helper-text" data-error="Fill Text"></span>
+    </div>
+
+    <button class="btn btn-primary">Post Vacancy</button>
+</form>

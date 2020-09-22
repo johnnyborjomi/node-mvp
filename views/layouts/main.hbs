@@ -1,24 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/main.css">
-</head>
+{{> head}}
 <body>
     <nav>
         <div class="nav-wrapper container">
-        <a href="/" class="brand-logo">Logo</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/about">About</a></li>
-            <li><a href="/vacancies">Vacancies</a></li>
-        </ul>
+            <a href="/" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                
+                <li class="{{#if isHome}}active{{/if}}"><a href="/">Home</a></li>
+                <li class="{{#if isAbout}}active{{/if}}"><a href="/about">About</a></li>
+                <li class="{{#if isVacancies}}active{{/if}}"><a href="/vacancies">Vacancies</a></li>
+            </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
         </div>
     </nav>
-    <div class="container">
+    <ul id="slide-out" class="sidenav">
+        <ul class="left">
+            <li class="{{#if isHome}}active{{/if}}"><a href="/">Home</a></li>
+            <li class="{{#if isAbout}}active{{/if}}"><a href="/about">About</a></li>
+            <li class="{{#if isVacancies}}active{{/if}}"><a href="/vacancies">Vacancies</a></li>
+        </ul>
+    </ul>
+        
+    <div class="container main-wrapper">
         {{{body}}}
     </div>
-<script src="/bundle.js"></script>
+{{> footer}}
 </body>
 </html>

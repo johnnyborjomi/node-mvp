@@ -1,0 +1,22 @@
+<h1>Our Vacancies</h1>
+
+{{#if vacancies.length}}
+    {{#each vacancies }}
+        <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">{{title}}<i class="material-icons right">more_vert</i></span>
+                <p class="right-align">{{createDate}}</p>
+                <p><b>{{money salary}}</b></p>
+                <p><a href="/vacancies/{{id}}">Visit Page</a></p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                <p>{{text}}</p>
+            </div>
+        </div>
+    {{/each}}
+{{else}}
+<p>No Avaliable Vacancies.</p>
+{{/if}}
