@@ -1,0 +1,10 @@
+
+<h1>Delete <b>"{{data.title}}"</b> Vacancy?</h1>
+<hr>
+<form action="/vacancies/delete" method="POST">
+   
+    <input type="hidden" name="id" value="{{data.id}}">
+
+    <button class="btn btn-primary">Delete Vacancy</button>
+    <a class="btn grey" href="/vacancies">Cancel</a>
+</form>

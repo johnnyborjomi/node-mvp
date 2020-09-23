@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const uuid = require('uuid/v4');
 
-const DATA_PATH = path.join(__dirname, '..', 'data', 'vacancies.json');
+console.log('LOL', path.dirname(require.main.filename));
+
+const DATA_PATH = path.join(path.dirname(require.main.filename), 'data', 'vacancies.json');
 
 class Vacancy {
     constructor(title, salary, text) {
@@ -18,15 +20,23 @@ class Vacancy {
         console.log(vacancies);
         vacancies.push(this.getVacancyFields());
         
-        return new Promise((resolve, reject) => {
-            fs.writeFile(DATA_PATH, JSON.stringify(vacancies, null, '\t'), err => {
-                if(err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            })
-        })
+        return Vacancy.writeVacanciesFile(vacancies);
+    }
+
+    static async update(vacancyData) {
+        const vacancies = await Vacancy.getAll();
+        const vacancyIndex = vacancies.findIndex(vacancy => vacancy.id === vacancyData.id);
+        vacancies[vacancyIndex] = {...vacancyData, createDate: new Date().toJSON()};
+
+        return Vacancy.writeVacanciesFile(vacancies);
+    }
+
+    static async delete(id) {
+        const vacancies = await Vacancy.getAll();
+        const vacancyIndex = vacancies.findIndex(vacancy => vacancy.id === id);
+        vacancies.splice(vacancyIndex, 1);
+
+        return Vacancy.writeVacanciesFile(vacancies);
     }
 
     static getAll() {
@@ -58,6 +68,18 @@ class Vacancy {
             id: this.id,
             createDate: this.createDate
         }
+    }
+
+    static writeVacanciesFile(vacancies) {
+        return new Promise((resolve, reject) => {
+            fs.writeFile(DATA_PATH, JSON.stringify(vacancies, null, '\t'), err => {
+                if(err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            })
+        })
     }
 }
 

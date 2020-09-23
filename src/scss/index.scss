@@ -10,6 +10,10 @@ $secondary-color: color("materialize-red", "lighten-1") !default;
     min-height: 70vh;
 }
 
+.spacer {
+  padding-top: 40px;
+}
+
 @font-face {
     font-family: 'Material Icons';
     font-style: normal;
