@@ -1,19 +1,22 @@
-const {Router} = require('express');
+const {Router, json} = require('express');
 const router = Router();
 const Vacancy = require('../models/vacancy');
 
 router.get('/', async (req, res) => {
-    const vacancies = await Vacancy.getAll();
+    const vacancies = await Vacancy.find();
+    // const templData = JSON.parse(JSON.stringify(vacancies));
+    const templData = [];
+    vacancies.map(v => templData.push(v.toObject({getters: true})));
     res.render('vacancies', {
         title: 'Vacancies Page',
         isVacancies: true,
-        vacancies: vacancies
+        vacancies: templData
     });
 })
 
 router.get('/:id', async (req, res) => {
 
-    const data = await Vacancy.getById(req.params.id);
+    const data = await (await Vacancy.findById(req.params.id)).toObject({getters: true});
     res.render('vacancy', {
         layout: 'single-page',
         data: data
@@ -21,7 +24,7 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/edit', async (req, res) => {
-    await Vacancy.update(req.body);
+    await Vacancy.findByIdAndUpdate(req.body.id, req.body);
     res.redirect('/vacancies');
 })
 
@@ -29,7 +32,7 @@ router.get('/:id/edit', async (req, res) => {
     if(!req.query.allow) {
         res.redirect('/');
     } else {
-        const data = await Vacancy.getById(req.params.id);
+        const data = await (await Vacancy.findById(req.params.id)).toObject({getters: true});
         res.render('edit-vacancy', {
             data: data
         })
@@ -37,7 +40,12 @@ router.get('/:id/edit', async (req, res) => {
 })
 
 router.post('/delete', async (req, res) => {
-    await Vacancy.delete(req.body.id);
+    try {
+        await Vacancy.deleteOne({_id: req.body.id});
+    } catch (e) {
+        console.log(e);
+    }
+   
     res.redirect('/vacancies');
 })
 
@@ -45,7 +53,7 @@ router.get('/:id/delete', async (req, res) => {
     if(!req.query.allow) {
         res.redirect('/');
     } else {
-        const data = await Vacancy.getById(req.params.id);
+        const data = await (await Vacancy.findById(req.params.id)).toObject({getters: true});
         res.render('delete-vacancy', {
             data: data
         })

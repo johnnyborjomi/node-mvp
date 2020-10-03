@@ -11,12 +11,20 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    console.log(req.body);
+    console.log(req.body.title)
+    try {
+        const vacancy = new Vacancy({
+            title: req.body.title,
+            salary: req.body.salary,
+            text: req.body.text,
+            createDate: new Date().toJSON()
+        });
+        await vacancy.save();
+        res.redirect('/vacancies');
 
-    const vacancy = new Vacancy(req.body.vacancy_title, req.body.salary_range, req.body.vacancy_text);
-    await vacancy.save();
-
-    res.redirect('/vacancies');
+    } catch (e) {
+        console.log(e);
+    }
 })
 
 module.exports = router;

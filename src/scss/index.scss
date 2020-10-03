@@ -14,6 +14,11 @@ $secondary-color: color("materialize-red", "lighten-1") !default;
   padding-top: 40px;
 }
 
+.login-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 @font-face {
     font-family: 'Material Icons';
     font-style: normal;
