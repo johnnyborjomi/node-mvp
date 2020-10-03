@@ -1,18 +1,18 @@
 const {Router} = require('express');
 const router = Router();
-const Admin = require('../models/admin');
-
-router.get('/login', async (req, res) => {
-    res.render('admin/login', {
-        layout: 'admin',
-        title: 'Admin Login'
-    })
-})
+const Admin = require('../../models/admin');
 
 router.get('/dashboard', async (req, res) => {
     res.render('admin/dashboard', {
         layout: 'admin',
         title: 'Admin Dashboard'
+    })
+});
+
+router.get('/login', async (req, res) => {
+    res.render('admin/login', {
+        layout: 'admin',
+        title: 'Admin Login'
     })
 })
 

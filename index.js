@@ -1,24 +1,27 @@
 const config = require('./config');
 const express = require('express');
-const session = require('express-session');
-const mongoose = require('mongoose');
-const chalk = require('chalk');
 const path = require('path');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongodb-session')(session);
+const chalk = require('chalk');
 const exphbs = require('express-handlebars');
-const PORT = process.env.PORT || 3000;
 const hbsHelpers = require('./hbs-helpers/helpers');
 
 const homeRouter = require('./routes/home');
 const aboutRouter = require('./routes/about');
 const vacanciesRouter = require('./routes/vacancies');
-const addVacancyRouter = require('./routes/add-vacancy');
-const adminRouter = require('./routes/admin');
+// const addVacancyRouter = require('./routes/add-vacancy');
+const adminAuthRouter = require('./routes/admin/auth');
+const adminVacanciesRouter = require('./routes/admin/vacancy');
 
 const varMiddleware = require('./middleware/variables');
 
-const Admin = require('./models/admin');
-
 const app = express();
+const store = new MongoStore({
+    collection: 'sessions',
+    uri: config.DB_URL
+})
 
 const hbs = exphbs.create({
     defaultLayout: 'main',
@@ -30,31 +33,23 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
-// app.use(async(req, res, next) => {
-//     try {
-//         const admin = await Admin.findById('5f78a8356b9fb505e62d756e');
-//         req.admin = admin;
-//         next();
-//     } catch(e) {
-//         console.log(e);
-//     }
-// })
-
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 
 app.use(session({
     secret: 'some secret value',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store
 }));
 app.use(varMiddleware);
 
 app.use('/', homeRouter);
 app.use('/about', aboutRouter);
 app.use('/vacancies', vacanciesRouter);
-app.use('/add', addVacancyRouter);
-app.use('/admin', adminRouter)
+// app.use('/add', addVacancyRouter);
+app.use('/admin', adminAuthRouter);
+app.use('/admin/vacancy', adminVacanciesRouter);
 
 async function start() {
     try {
@@ -65,17 +60,8 @@ async function start() {
             useFindAndModify: false
         });
 
-        const candidate = await Admin.findOne();
-        if(!candidate) {
-            const admin = new Admin({
-                login: 'admin',
-                password: 'root'
-            });
-            await admin.save();
-        }
-
-        app.listen(PORT, () => {
-            console.log(chalk.underline.bold.blue(`Server running at port: ${PORT}`));
+        app.listen(config.PORT, () => {
+            console.log(chalk.underline.bold.blue(`Server running at port: ${config.PORT}`));
         })
     } catch(e) {
         console.log(e);

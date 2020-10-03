@@ -5,5 +5,6 @@ const DB_URL = `mongodb+srv://johnnyborjomi:${DB_PASS}@cluster0.ksxcu.mongodb.ne
 
 module.exports = {
     DB_PASS,
-    DB_URL
+    DB_URL,
+    PORT: process.env.PORT || 3000
 };

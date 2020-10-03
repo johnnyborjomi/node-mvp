@@ -4,10 +4,12 @@
         <div class="nav-wrapper container">
             <a href="/" class="brand-logo">Logo</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                
                 <li class="{{#if isHome}}active{{/if}}"><a href="/">Home</a></li>
                 <li class="{{#if isAbout}}active{{/if}}"><a href="/about">About</a></li>
                 <li class="{{#if isVacancies}}active{{/if}}"><a href="/vacancies">Vacancies</a></li>
+                {{#if isAdminAuth}}
+                    <li><a href="/admin/dashboard">Admin</a></li>
+                {{/if}}
             </ul>
             <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
         </div>

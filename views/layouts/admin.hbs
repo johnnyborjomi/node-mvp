@@ -1,13 +1,13 @@
 {{> head}}
 <body>
-    <nav>
+    <nav class="red">
         <div class="nav-wrapper container">
             <a href="/admin" class="brand-logo">Admin Panel</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 
-                <li class="{{#if isHome}}active{{/if}}"><a href="/">Home</a></li>
+                <li><a href="/">Home</a></li>
                 {{#if isAdminAuth}}
-                    <li class="{{#if isVacancies}}active{{/if}}"><a href="/">Admin</a></li>
+                    <li><a href="/admin/dashboard">Admin Dashboard</a></li>
                 {{/if}}
                 {{#if isAdminAuth}}
                     <li><a href="/admin/logout">Log Out</a></li>
