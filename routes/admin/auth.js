@@ -3,6 +3,10 @@ const router = Router();
 const Admin = require('../../models/admin');
 const authMW = require('../../middleware/admin-auth');
 
+router.get('/', authMW, async (req, res) => {
+    res.redirect('/admin/dashboard');
+});
+
 router.get('/dashboard', authMW, async (req, res) => {
     res.render('admin/dashboard', {
         layout: 'admin',
@@ -11,10 +15,15 @@ router.get('/dashboard', authMW, async (req, res) => {
 });
 
 router.get('/login', async (req, res) => {
-    res.render('admin/login', {
-        layout: 'admin',
-        title: 'Admin Login'
-    })
+    if(!req.session.isAdminAuthenticated) {
+        res.render('admin/login', {
+            layout: 'admin',
+            title: 'Admin Login'
+        })
+    } else {
+        res.redirect('/admin/dashboard');
+    }
+    
 })
 
 router.get('/logout', async (req, res) => {
@@ -24,13 +33,30 @@ router.get('/logout', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-    const admin = await Admin.findById('5f78a8356b9fb505e62d756e');
-    req.session.admin = admin;
-    req.session.isAdminAuthenticated = true;
-    req.session.save(err => {
-        if(err) throw err;
-        res.redirect('/admin/dashboard');
-    })
+    try {
+        const {login, password} = req.body;                            
+        const candidate = await Admin.findOne({login});
+        if (candidate) {
+            console.log('Login: ', candidate);
+            if(candidate.password === password) {
+                req.session.admin = candidate;
+                req.session.isAdminAuthenticated = true;
+                req.session.save(err => {
+                    if(err) {
+                        throw err;
+                    } else {
+                        res.redirect('/admin/dashboard');
+                    }
+                })
+            } else {
+                res.redirect('/admin/login');
+            }
+        } else {
+            res.redirect('/admin/login');
+        }
+    } catch(err) {
+        console.log(err);
+    }
 })
 
 module.exports = router;
