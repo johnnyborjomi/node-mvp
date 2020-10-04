@@ -1,8 +1,9 @@
 const {Router} = require('express');
 const router = Router();
 const Admin = require('../../models/admin');
+const authMW = require('../../middleware/admin-auth');
 
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', authMW, async (req, res) => {
     res.render('admin/dashboard', {
         layout: 'admin',
         title: 'Admin Dashboard'

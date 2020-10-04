@@ -2,8 +2,9 @@ const {Router} = require('express');
 const router = Router();
 const Admin = require('../../models/admin');
 const Vacancy = require('../../models/vacancy');
+const authMW = require('../../middleware/admin-auth');
 
-router.get('/', async (req, res) => {
+router.get('/', authMW, async (req, res) => {
     const vacancies = await Vacancy.find();
     // const templData = JSON.parse(JSON.stringify(vacancies));
     const templData = [];
@@ -16,16 +17,7 @@ router.get('/', async (req, res) => {
     });
 })
 
-// router.get('/:id', async (req, res) => {
-
-//     const data = await (await Vacancy.findById(req.params.id)).toObject({getters: true});
-//     res.render('admin/vacancy', {
-//         layout: 'admin',
-//         data: data
-//     })
-// })
-
-router.get('/add', (req, res) => {
+router.get('/add', authMW, (req, res) => {
     try {
         res.render('admin/add-vacancy', {
             layout: 'admin',
@@ -37,7 +29,16 @@ router.get('/add', (req, res) => {
     }
 })
 
-router.post('/add', async (req, res) => {
+router.get('/:id', authMW, async (req, res) => {
+
+    const data = await (await Vacancy.findById(req.params.id)).toObject({getters: true});
+    res.render('admin/vacancy', {
+        layout: 'admin',
+        data: data
+    })
+})
+
+router.post('/add', authMW, async (req, res) => {
     console.log(req.body.title)
     try {
         const vacancy = new Vacancy({
@@ -54,12 +55,12 @@ router.post('/add', async (req, res) => {
     }
 })
 
-router.post('/edit', async (req, res) => {
+router.post('/edit', authMW, async (req, res) => {
     await Vacancy.findByIdAndUpdate(req.body.id, req.body);
     res.redirect('/admin/vacancy');
 })
 
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', authMW, async (req, res) => {
     if(!req.query.allow) {
         res.redirect('/admin/vacancy');
     } else {
@@ -71,7 +72,7 @@ router.get('/:id/edit', async (req, res) => {
     }
 })
 
-router.post('/delete', async (req, res) => {
+router.post('/delete', authMW, async (req, res) => {
     try {
         await Vacancy.deleteOne({_id: req.body.id});
     } catch (e) {
@@ -81,7 +82,7 @@ router.post('/delete', async (req, res) => {
     res.redirect('/admin/vacancy');
 })
 
-router.get('/:id/delete', async (req, res) => {
+router.get('/:id/delete', authMW, async (req, res) => {
     if(!req.query.allow) {
         res.redirect('/admin/vacancy');
     } else {
