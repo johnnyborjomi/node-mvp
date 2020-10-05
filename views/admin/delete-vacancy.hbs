@@ -4,6 +4,7 @@
 <form action="/admin/vacancy/delete" method="POST">
    
     <input type="hidden" name="id" value="{{data.id}}">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
 
     <button class="btn btn-primary">Delete Vacancy</button>
     <a class="btn grey" href="/admin/vacancy">Cancel</a>

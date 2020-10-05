@@ -12,6 +12,9 @@
                 {{#if isAdminAuth}}
                     <li><a href="/admin/logout">Log Out</a></li>
                 {{/if}}
+                {{#if isAdminAuth}}
+                    <li><small>Welcome, {{admin.login}}</small></li>
+                {{/if}}
             </ul>
             <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
         </div>

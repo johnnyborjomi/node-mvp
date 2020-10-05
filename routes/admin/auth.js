@@ -1,4 +1,5 @@
 const {Router} = require('express');
+const bcrypt = require('bcryptjs');
 const router = Router();
 const Admin = require('../../models/admin');
 const authMW = require('../../middleware/admin-auth');
@@ -23,7 +24,6 @@ router.get('/login', async (req, res) => {
     } else {
         res.redirect('/admin/dashboard');
     }
-    
 })
 
 router.get('/logout', async (req, res) => {
@@ -38,11 +38,12 @@ router.post('/login', async (req, res) => {
         const candidate = await Admin.findOne({login});
         if (candidate) {
             console.log('Login: ', candidate);
-            if(candidate.password === password) {
+            const passChecked = await bcrypt.compare(password, candidate.password);
+            if (passChecked) {
                 req.session.admin = candidate;
                 req.session.isAdminAuthenticated = true;
                 req.session.save(err => {
-                    if(err) {
+                    if (err) {
                         throw err;
                     } else {
                         res.redirect('/admin/dashboard');
