@@ -56,3 +56,8 @@ $secondary-color: color("materialize-red", "lighten-1") !default;
 .file label {
   position: static;
 }
+
+hr {
+  background: $secondary-color;
+  height: 5px;
+}
