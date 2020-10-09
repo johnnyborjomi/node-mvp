@@ -39,7 +39,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 
 app.use(session({
-    secret: 'some secret value',
+    secret: config.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store

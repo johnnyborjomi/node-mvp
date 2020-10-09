@@ -37,6 +37,10 @@ $secondary-color: color("materialize-red", "lighten-1") !default;
   padding-top: 40px;
 }
 
+.spacer-md {
+  padding-top: 20px;
+}
+
 .login-form {
   max-width: 500px;
   margin: 0 auto;
@@ -47,4 +51,8 @@ $secondary-color: color("materialize-red", "lighten-1") !default;
   color: white;
   border-radius: 10px;
   padding: 20px;
+}
+
+.file label {
+  position: static;
 }

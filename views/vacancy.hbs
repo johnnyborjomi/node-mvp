@@ -22,3 +22,51 @@
         <p>{{data.text}}</p>
     </div>
 </div>
+<div class="spacer"></div>
+<h4>Send your info to apply vancy:</h4>
+<div class="spacer-md"></div>
+<form action="/apply" method="POST">
+
+    <div class="input-field">
+        <input placeholder="Full Name" name="full-name" id="full-name" type="text" required class="validate">
+        <label for="title">Full Name</label>
+        <span class="helper-text" data-error="Fill Full Name"></span>
+    </div>
+
+    <div class="input-field">
+        <input placeholder="E-mail" name="email" id="email" type="email" required class="validate">
+        <label for="title">E-mail</label>
+        <span class="helper-text" data-error="Fill E-mail"></span>
+    </div>
+
+    <div class="input-field file">
+        <label for="title">Upload your CV</label>
+        <div><input name="cv" id="cv" type="file" required class="validate"></div>
+        <span class="helper-text" data-error="Please Upload your CV"></span>
+    </div>
+
+    <div class="input-field">
+        <textarea placeholder="Message" name="message" id="message" required class="validate materialize-textarea"></textarea>
+        <label for="text">Message</label>
+        <span class="helper-text" data-error="Fill Message"></span>
+    </div>
+
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+
+    <button class="btn green btn-secondary">Apply</button>
+</form>
+<div class="spacer"></div>
+<h4>Subscribe to stay tuned with new vacancies:</h4>
+<div class="spacer-md"></div>
+<form action="/subscribe" method="POST">
+    <div class="input-field">
+        <input placeholder="E-mail" name="email" id="email" type="email" required class="validate">
+        <label for="title">E-mail</label>
+        <span class="helper-text" data-error="Fill E-mail"></span>
+    </div>
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+
+    <button class="btn green btn-secondary">Subscribe</button>
+</form>
+<div class="spacer"></div>
+<div class="spacer"></div>
