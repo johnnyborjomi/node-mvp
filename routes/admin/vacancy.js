@@ -13,7 +13,7 @@ router.get('/', authMW, async (req, res) => {
         layout: 'admin',
         title: 'Vacancies Page',
         isVacancies: true,
-        vacancies: templData
+        vacancies: templData.reverse()
     });
 })
 

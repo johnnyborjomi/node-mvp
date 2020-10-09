@@ -19,7 +19,8 @@ router.get('/login', async (req, res) => {
     if(!req.session.isAdminAuthenticated) {
         res.render('admin/login', {
             layout: 'admin',
-            title: 'Admin Login'
+            title: 'Admin Login',
+            error: req.flash('loginError')
         })
     } else {
         res.redirect('/admin/dashboard');
@@ -50,9 +51,11 @@ router.post('/login', async (req, res) => {
                     }
                 })
             } else {
+                req.flash('loginError', 'Invalid Login or Password!')
                 res.redirect('/admin/login');
             }
         } else {
+            req.flash('loginError', 'Invalid Login or Password!')
             res.redirect('/admin/login');
         }
     } catch(err) {
