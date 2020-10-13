@@ -13,9 +13,9 @@ const hbsHelpers = require('./hbs-helpers/helpers');
 const homeRouter = require('./routes/home');
 const aboutRouter = require('./routes/about');
 const vacanciesRouter = require('./routes/vacancies');
-// const addVacancyRouter = require('./routes/add-vacancy');
 const adminAuthRouter = require('./routes/admin/auth');
 const adminVacanciesRouter = require('./routes/admin/vacancy');
+const mailRouter = require('./routes/mail');
 
 const varMiddleware = require('./middleware/variables');
 
@@ -35,8 +35,9 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 app.use(session({
     secret: config.SESSION_SECRET,
@@ -51,9 +52,10 @@ app.use(varMiddleware);
 app.use('/', homeRouter);
 app.use('/about', aboutRouter);
 app.use('/vacancies', vacanciesRouter);
-// app.use('/add', addVacancyRouter);
 app.use('/admin', adminAuthRouter);
 app.use('/admin/vacancy', adminVacanciesRouter);
+app.use('/mail', mailRouter);
+
 
 async function start() {
     try {

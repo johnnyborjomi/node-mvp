@@ -49,7 +49,6 @@ router.post('/add', authMW, async (req, res) => {
         });
         await vacancy.save();
         res.redirect('/admin/vacancy');
-
     } catch (e) {
         console.log(e);
     }

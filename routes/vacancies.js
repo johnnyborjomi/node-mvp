@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     res.render('vacancies', {
         title: 'Vacancies Page',
         isVacancies: true,
-        vacancies: templData
+        vacancies: templData.reverse()
     });
 })
 

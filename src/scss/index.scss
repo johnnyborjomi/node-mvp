@@ -46,11 +46,18 @@ $secondary-color: color("materialize-red", "lighten-1") !default;
   margin: 0 auto;
 }
 
-.alert {
-  background-color: $secondary-color;
+.form-message {
   color: white;
   border-radius: 10px;
   padding: 20px;
+
+  &.alert {
+    background-color: $secondary-color;
+  }
+
+  &.success {
+    background-color: $primary-color;
+  }
 }
 
 .file label {
@@ -60,4 +67,5 @@ $secondary-color: color("materialize-red", "lighten-1") !default;
 hr {
   background: $secondary-color;
   height: 5px;
+  border: none;
 }

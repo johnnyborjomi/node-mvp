@@ -62,17 +62,5 @@
 <div class="spacer"></div>
 <hr>
 
-<h4>Subscribe to stay tuned with new vacancies:</h4>
-<div class="spacer-md"></div>
-<form action="/subscribe" method="POST">
-    <div class="input-field">
-        <input placeholder="E-mail" name="email" id="email" type="email" required class="validate">
-        <label for="title">E-mail</label>
-        <span class="helper-text" data-error="Fill E-mail"></span>
-    </div>
-    <input type="hidden" name="_csrf" value="{{csrf}}">
+{{> subscribe-form}}
 
-    <button class="btn green btn-secondary">Subscribe</button>
-</form>
-<div class="spacer"></div>
-<div class="spacer"></div>

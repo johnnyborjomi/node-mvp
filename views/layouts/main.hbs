@@ -19,6 +19,9 @@
             <li class="{{#if isHome}}active{{/if}}"><a href="/">Home</a></li>
             <li class="{{#if isAbout}}active{{/if}}"><a href="/about">About</a></li>
             <li class="{{#if isVacancies}}active{{/if}}"><a href="/vacancies">Vacancies</a></li>
+            {{#if isAdminAuth}}
+                <li><a href="/admin/dashboard">Admin</a></li>
+            {{/if}}
         </ul>
     </ul>
         
