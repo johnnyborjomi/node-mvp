@@ -16,6 +16,9 @@ const vacanciesRouter = require('./routes/vacancies');
 const adminAuthRouter = require('./routes/admin/auth');
 const adminVacanciesRouter = require('./routes/admin/vacancy');
 const mailRouter = require('./routes/mail');
+const subscribersRouter = require('./routes/admin/subscribers');
+const applicantsRouter = require('./routes/admin/applicants');
+const applyRouter = require('./routes/apply');
 
 const varMiddleware = require('./middleware/variables');
 
@@ -54,7 +57,10 @@ app.use('/about', aboutRouter);
 app.use('/vacancies', vacanciesRouter);
 app.use('/admin', adminAuthRouter);
 app.use('/admin/vacancy', adminVacanciesRouter);
+app.use('/admin/subscribers', subscribersRouter);
+app.use('/admin/applicants', applicantsRouter);
 app.use('/mail', mailRouter);
+app.use('/apply', applyRouter);
 
 
 async function start() {

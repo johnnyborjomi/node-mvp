@@ -31,7 +31,7 @@
 <form action="/apply" method="POST">
 
     <div class="input-field">
-        <input placeholder="Full Name" name="full-name" id="full-name" type="text" required class="validate">
+        <input placeholder="Full Name" name="fullName" id="fullName" type="text" required class="validate">
         <label for="title">Full Name</label>
         <span class="helper-text" data-error="Fill Full Name"></span>
     </div>
@@ -55,6 +55,7 @@
     </div>
 
     <input type="hidden" name="_csrf" value="{{csrf}}">
+    <input type="hidden" name="vacancyId" value="{{data._id}}">
 
     <button class="btn green btn-secondary">Apply</button>
 </form>

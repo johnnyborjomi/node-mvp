@@ -1,0 +1,27 @@
+
+
+<h1>Applicants List</h1>
+
+{{#if applicants.length}}
+    {{#each applicants }}
+        <div class="card hoverable">
+            <div class="card-content">
+                <b>Full Name: </b><span>{{fullName}}</span>
+                <br>
+                <b>Email: </b><span>{{email}}</span>
+                <br>
+                <b>CV: </b><span>{{cv}}</span>
+                <br>
+                <b>Message: </b><span>{{message}}</span>
+                <br>
+                <b>Date Subscirbed: </b><span>{{dateFromJSONDate createDate}}</span>
+                <hr>
+                <b>Vacancy Applied: </b><a href="/admin/vacancy/{{vacancyId.id}}">{{vacancyId.title}}</a>
+                <br>
+                <b>Vacancy salary: </b><span>{{money vacancyId.salary}}</span>
+            </div>
+        </div>
+    {{/each}}
+{{else}}
+<p>No Applicants.</p>
+{{/if}}

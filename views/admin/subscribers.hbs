@@ -1,0 +1,17 @@
+
+
+<h1>Subscribers List</h1>
+
+{{#if subscribers.length}}
+    {{#each subscribers }}
+        <div class="card hoverable">
+            <div class="card-content">
+                <b>Email: </b><span>{{email}}</span>
+                <br>
+                <b>Date Subscirbed: </b><span>{{dateFromJSONDate createDate}}</span>
+            </div>
+        </div>
+    {{/each}}
+{{else}}
+<p>No Subscribers.</p>
+{{/if}}
