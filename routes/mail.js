@@ -9,7 +9,7 @@ router.post('/subscribe', async (req, res) => {
     try {
         const {email} = req.body;
         const candidate = await Subscriber.findOne({email});
-        if(!candidate) {
+        if(candidate) {
             res.status(200).json({
                 subscribed: false,
                 message: 'User with these email already subscribed!'
