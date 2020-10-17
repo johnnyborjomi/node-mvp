@@ -1,13 +1,15 @@
 const {Router} = require('express');
 const Subscriber = require('../models/subscriber');
 const router = Router();
+const sendMail = require('../emails/subs-success');
+
 
 router.post('/subscribe', async (req, res) => {
     console.log('body:' ,req.body);
     try {
         const {email} = req.body;
         const candidate = await Subscriber.findOne({email});
-        if(candidate) {
+        if(!candidate) {
             res.status(200).json({
                 subscribed: false,
                 message: 'User with these email already subscribed!'
@@ -21,13 +23,12 @@ router.post('/subscribe', async (req, res) => {
             res.status(200).json({
                 subscribed: true,
                 message: 'Subscribed Succesfully!' 
-            })
+            });
+            sendMail(email);
         }
     } catch(err) {
         console.log(err);
     }
 })
-
-
 
 module.exports = router;
