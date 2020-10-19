@@ -16,7 +16,8 @@ const vacancy = new Schema({
     createDate: {
         type: String,
         required: true
-    }
+    },
+    locations: [String]
 })
 
 module.exports = model('Vacancy', vacancy);

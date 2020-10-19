@@ -8,6 +8,12 @@
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">{{title}}<i class="material-icons right">more_vert</i></span>
                 <p class="right-align">Posted: {{dateFromJSONDate createDate}}</p>
+                {{#if locations.length}}
+                    <b>Locations: </b>
+                            {{#each locations}}
+                                <span class="location">{{this}}</span>
+                            {{/each}}
+                {{/if}}
                 <p><b>{{money salary}}</b></p>
                 <p><a href="/vacancies/{{id}}">Visit Page</a></p>
             </div>

@@ -1,7 +1,7 @@
 import './scss/index.scss';
 import 'materialize-css';
 
-import {formHander, formHandler} from './components/subscribe-form';
+import {formHandler} from './components/subscribe-form';
 
 document.addEventListener('DOMContentLoaded', function() {
     const slider = document.querySelector('.carousel-slider');
@@ -21,5 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const sbscrbForm = document.getElementById('subscribe');
     if(sbscrbForm) {
         formHandler(sbscrbForm);
+    }
+
+    var selects = document.querySelectorAll('select');
+    if (selects.length) {
+        console.log(selects)
+        M.FormSelect.init(selects, {});
     }
 });

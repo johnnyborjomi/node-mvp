@@ -9,12 +9,16 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-function sendMail(to) {
+function sendSubscrbMail(email) {
     const mailOptions = {
         from: 'vacancies.support@gmail.com',
-        to: to,
+        to: email,
         subject: 'Subscription confirmation.',
-        text: 'You have succesfully subscribed to new vacancies!'
+        html: `
+                <h1>Congrats!!!</h1>
+                <p>You have succesfully subscribed to new vacancies with email: ${email}!</p>
+                <a href="${config.BASE_URL}/mail/unsubscribe?email=${email}">Unsubscribe</a>
+            `
     };
       
     transporter.sendMail(mailOptions, function(error, info){
@@ -26,4 +30,4 @@ function sendMail(to) {
     });
 }
 
-module.exports = sendMail;
+module.exports = sendSubscrbMail;

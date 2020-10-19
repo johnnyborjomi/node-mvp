@@ -1,0 +1,24 @@
+{{#if isUnsubscribed}}
+    {{#if isUnsubscribed.value}}
+        <h1>You have successfully unsubscribed.</h1>
+    {{else}}
+        <h1>Something went wrong with unsubscription.</h1>
+    {{/if}}
+{{else}}
+    {{#if isSubscribed}}
+    <h1>Are you sure you want to unsubscribe from newsletter?</h1>
+    <hr>
+    <form action="/mail/unsubscribe" method="POST">
+    
+        <input type="hidden" name="email" value="{{email}}">
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+
+        <button class="btn btn-primary">Unsubscribe</button>
+        <a class="btn grey" href="/">Cancel</a>
+    </form>
+    {{else}}
+        <h1>Sorry, but You are not subscribed anymore.<h1>
+    {{/if}}
+{{/if}}
+
+

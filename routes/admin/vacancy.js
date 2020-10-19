@@ -3,6 +3,7 @@ const router = Router();
 const Admin = require('../../models/admin');
 const Vacancy = require('../../models/vacancy');
 const authMW = require('../../middleware/admin-auth');
+const sendNewVacancyMail = require('../../emails/new-vacancy');
 
 router.get('/', authMW, async (req, res) => {
     const vacancies = await Vacancy.find();
@@ -39,16 +40,19 @@ router.get('/:id', authMW, async (req, res) => {
 })
 
 router.post('/add', authMW, async (req, res) => {
-    console.log(req.body.title)
+    console.log('new vacancy: ', req.body)
     try {
         const vacancy = new Vacancy({
             title: req.body.title,
             salary: req.body.salary,
             text: req.body.text,
+            locations: req.body.locations,
             createDate: new Date().toJSON()
         });
         await vacancy.save();
         res.redirect('/admin/vacancy');
+
+        await sendNewVacancyMail(vacancy);
     } catch (e) {
         console.log(e);
     }
