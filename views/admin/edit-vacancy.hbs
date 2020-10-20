@@ -14,16 +14,19 @@
     </div>
     <div class="input-field">
         <select name="locations" multiple id="location">
-            <option value="" disabled>Choose your option</option>
-            <option value="Kharkov, Ukraine">Kharkov, Ukraine</option>
-            <option value="Kiev, Ukraine">Kiev, Ukraine</option>
-            <option value="Wrozlav, Poland">Wrozlav, Poland</option>
-            <option value="London, UK">London, UK</option>
-            <option value="New York, US">New York, US</option>
-            <option value="Los Angeles, US">Los Angeles, US</option>
+            {{{selectOptions 'locations' data.locations}}}
         </select>
         <label for="location">Location</label>
     </div>
+    <div class="spacer"></div>
+    <div class="input-field">
+        <select name="vacancyType" id="vacancyType">
+            {{{selectOptions 'vacancyTypes' data.vacancyType}}}
+        </select>
+        <label for="vacancyType">Vacancy Type</label>
+    </div>
+    <div class="spacer"></div>
+
     <div class="input-field">
         <textarea placeholder="Vacancy Text" name="text" type="text" required class="validate materialize-textarea">{{data.text}}</textarea>
         <label for="vacancy_text">Vacancy Text</label>

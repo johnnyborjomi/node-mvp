@@ -41,6 +41,10 @@ $secondary-color: color("materialize-red", "lighten-1") !default;
   padding-top: 20px;
 }
 
+.spacer-xs {
+  padding-top: 5px;
+}
+
 .login-form {
   max-width: 500px;
   margin: 0 auto;
@@ -75,4 +79,12 @@ hr {
   background-color: lightgrey;
   border-radius: 4px;
   padding: 1px 5px;
+}
+
+.vacancy-type {
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: grey;
+  display: inline-block;
 }

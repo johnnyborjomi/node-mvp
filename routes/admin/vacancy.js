@@ -47,6 +47,7 @@ router.post('/add', authMW, async (req, res) => {
             salary: req.body.salary,
             text: req.body.text,
             locations: req.body.locations,
+            vacancyType: req.body.vacancyType,
             createDate: new Date().toJSON()
         });
         await vacancy.save();

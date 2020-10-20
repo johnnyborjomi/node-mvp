@@ -17,7 +17,8 @@ const vacancy = new Schema({
         type: String,
         required: true
     },
-    locations: [String]
+    locations: [String],
+    vacancyType: String,
 })
 
 module.exports = model('Vacancy', vacancy);
