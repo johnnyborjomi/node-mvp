@@ -27,13 +27,26 @@
                     <div class="spacer-xs"></div>
                     <p class="vacancy-type">{{vacancyType}}</p>
                 {{/if}}
-                <p><b>{{money salary}}</b></p>
-                <p><a href="/admin/vacancy/{{id}}">View</a></p>
+                <p>Salary: <b>{{money salary}}</b></p>
+                <div class="spacer-md"></div>
+                <div class="row">
+                    <div class="col s2">
+                        <a href="/admin/vacancy/{{id}}" class="btn hollow left">View</a>
+                    </div>
+                    <div class="col offset-s7 s2">
+                        <a href="/admin/vacancy/{{id}}/delete?allow=true" class="btn right">Delete</a>
+                    </div>
+                    <div class="col s1">
+                        <a href="/admin/vacancy/{{id}}/edit?allow=true" class="btn green right">Edit</a>
+                    </div>
+                </div>
             </div>
             <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                <span class="card-title grey-text text-darken-4">{{title}}<i class="material-icons right">close</i></span>
+                <p>Vacancy Text:</p>
                 <p>{{text}}</p>
             </div>
+            
         </div>
     {{/each}}
 {{else}}

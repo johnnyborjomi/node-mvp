@@ -14,10 +14,12 @@
                                 <span class="location">{{this}}</span>
                             {{/each}}
                 {{/if}}
+                <div class="spacer-xs"></div>
                 {{#if vacancyType}}
                     <p class="vacancy-type">{{vacancyType}}</p>
                 {{/if}}
-                <p><b>{{money salary}}</b></p>
+                <div class="spacer-md"></div>
+                <p>Salary:<b> {{money salary}}</b></p>
                 <p><a href="/vacancies/{{id}}">Visit Page</a></p>
             </div>
             <div class="card-reveal">

@@ -1,11 +1,12 @@
 const { compareSync } = require("bcryptjs");
+const moment = require('moment');
 
 const dump = (context) => {
     return JSON.stringify(context, null, '\t');
 }
 
 const dateFromJSONDate = (jsonDate) => {
-    return jsonDate.split('T')[0].split('-').join(' ');
+    return moment(jsonDate).format("Do MMMM YYYY");
 }
 
 const money = (money) => {

@@ -29,6 +29,14 @@ $secondary-color: color("materialize-red", "lighten-1") !default;
   -webkit-font-smoothing: antialiased;
 }
 
+.btn {
+  &.hollow {
+    background-color: transparent;
+    color: blue;
+    border: 1px solid blue;
+  }
+}
+
 .main-wrapper {
     min-height: 70vh;
 }
@@ -87,4 +95,8 @@ hr {
   padding: 1px 5px;
   color: grey;
   display: inline-block;
+}
+
+.editorjs {
+  border: 1px solid lightgrey;
 }

@@ -1,7 +1,7 @@
 
 <h1>Edit <b>"{{data.title}}"</b> Vacancy</h1>
 
-<form action="/admin/vacancy/edit" method="POST">
+<form action="/admin/vacancy/edit" method="POST" class="form-with-editor">
     <div class="input-field">
         <input placeholder="Vacancy Title" name="title" value="{{data.title}}" type="text" required class="validate">
         <label for="vacancy_title">Vacancy Title</label>
@@ -26,14 +26,20 @@
         <label for="vacancyType">Vacancy Type</label>
     </div>
     <div class="spacer"></div>
+    <label for="text">Vacancy Text</label>
+    <div class="spacer-md"></div>
+    <div id="editorjs" class="editorjs"></div>
+    <div class="spacer"></div>
 
-    <div class="input-field">
-        <textarea placeholder="Vacancy Text" name="text" type="text" required class="validate materialize-textarea">{{data.text}}</textarea>
-        <label for="vacancy_text">Vacancy Text</label>
+    {{!-- <div class="input-field">
+        <textarea placeholder="Vacancy Text" name="text" id="text" type="text" required class="editor-textarea"></textarea>
+        <label for="text">Vacancy Text</label>
         <span class="helper-text" data-error="Fill Text"></span>
-    </div>
+    </div> --}}
+    <input type="hidden" name="text" id="text" type="text" required class="editor-textinput" value="{{data.text}}">
     <input type="hidden" name="id" value="{{data.id}}">
     <input type="hidden" name="_csrf" value="{{csrf}}">
 
     <button class="btn btn-primary">Update Vacancy</button>
 </form>
+<div class="spacer"></div>

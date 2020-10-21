@@ -60,7 +60,8 @@ router.post('/add', authMW, async (req, res) => {
 })
 
 router.post('/edit', authMW, async (req, res) => {
-    await Vacancy.findByIdAndUpdate(req.body.id, req.body);
+    console.log('update: ', req.body);
+    await Vacancy.findByIdAndUpdate(req.body.id, {...req.body, createDate: new Date().toJSON()});
     res.redirect('/admin/vacancy');
 })
 

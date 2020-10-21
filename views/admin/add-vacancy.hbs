@@ -1,6 +1,6 @@
 <h1>Add New Vacancy</h1>
 
-<form action="/admin/vacancy/add" method="POST">
+<form action="/admin/vacancy/add" method="POST" class="form-with-editor">
     <div class="input-field">
         <input placeholder="Vacancy Title" name="title" id="title" type="text" required class="validate">
         <label for="title">Vacancy Title</label>
@@ -13,13 +13,7 @@
     </div>
     <div class="input-field">
         <select name="locations" multiple id="location">
-            <option value="" disabled>Choose your option</option>
-            <option value="Kharkov, Ukraine">Kharkov, Ukraine</option>
-            <option value="Kiev, Ukraine">Kiev, Ukraine</option>
-            <option value="Wrozlav, Poland">Wrozlav, Poland</option>
-            <option value="London, UK">London, UK</option>
-            <option value="New York, US">New York, US</option>
-            <option value="Los Angeles, US">Los Angeles, US</option>
+            {{{selectOptions 'locations' data.locations}}}
         </select>
         <label for="location">Location</label>
     </div>
@@ -27,21 +21,24 @@
 
     <div class="input-field">
         <select name="vacancyType" id="vacancyType">
-            <option value="" disabled>Choose your option</option>
-            <option value="Remote - Full Time">Remote - Full Time</option>
-            <option value="Remote - Part Time">Remote - Part Time</option>
-            <option value="Office - Full Time">Office - Full Time</option>
-            <option value="Office - Part Time">Office - Part Time</option>
+            {{{selectOptions 'vacancyTypes' data.vacancyType}}}
         </select>
         <label for="vacancyType">Vacancy Type</label>
     </div>
     <div class="spacer"></div>
-    <div class="input-field">
-        <textarea placeholder="Vacancy Text" name="text" id="text" type="text" required class="validate materialize-textarea"></textarea>
+    <label for="text">Vacancy Text</label>
+    <div class="spacer-md"></div>
+    <div id="editorjs" class="editorjs"></div>
+    <div class="spacer"></div>
+
+    {{!-- <div class="input-field">
+        <textarea placeholder="Vacancy Text" name="text" id="text" type="text" required class="editor-textarea"></textarea>
         <label for="text">Vacancy Text</label>
         <span class="helper-text" data-error="Fill Text"></span>
-    </div>
+    </div> --}}
+    <input type="hidden" name="text" id="text" type="text" required class="editor-textinput">
     <input type="hidden" name="_csrf" value="{{csrf}}">
 
     <button class="btn btn-primary">Post Vacancy</button>
 </form>
+<div class="spacer"></div>
