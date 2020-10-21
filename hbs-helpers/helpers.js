@@ -47,11 +47,38 @@ const selectOptions = (name, selected) => {
     return html;
 }
 
+const editorText = (jsonText) => {
+    let text = jsonText;
+    try {
+        text = JSON.parse(text);
+        console.log('parsed: ', text);
+    } catch(err) {
+        console.log(err);
+    }
+    if (typeof text === 'string') return text;
+
+    return text.reduce((acc, item) => {
+        switch (item.type) {
+            case 'header': 
+                return acc += `<h${item.data.level}>${item.data.text}</h${item.data.level}>`;
+            case 'paragraph': 
+                return acc += `<p>${item.data.text}</p>`;
+            case 'list': 
+                let tag = item.data.type === 'ordered' ? 'ol' : 'ul';
+                let lis = item.data.items.reduce((acc, item) => acc += `<li>${item}</li>`, '')
+                return acc += `<${tag}>${lis}</${tag}>`;
+            default: 
+                return '';
+        }
+    }, '');
+}
+
 module.exports = {
     dump,
     dateFromJSONDate,
     money,
-    selectOptions
+    selectOptions,
+    editorText
 }
 
 
