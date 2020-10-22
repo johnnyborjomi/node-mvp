@@ -29,6 +29,10 @@ $secondary-color: color("materialize-red", "lighten-1") !default;
   -webkit-font-smoothing: antialiased;
 }
 
+img {
+  max-width: 100%;
+}
+
 .btn {
   &.hollow {
     background-color: transparent;
@@ -119,4 +123,8 @@ hr {
       list-style: decimal;
     }
   }
+}
+
+.cv-wrap {
+  max-width: 200px;
 }

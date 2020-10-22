@@ -19,8 +19,10 @@ const mailRouter = require('./routes/mail');
 const subscribersRouter = require('./routes/admin/subscribers');
 const applicantsRouter = require('./routes/admin/applicants');
 const applyRouter = require('./routes/apply');
+const errorHandler = require('./middleware/error');
 
 const varMiddleware = require('./middleware/variables');
+const fileMiddleware = require('./middleware/file');
 
 const app = express();
 const store = new MongoStore({
@@ -39,6 +41,8 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/cv', express.static(path.join(__dirname, 'cv')));
+
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -48,6 +52,7 @@ app.use(session({
     saveUninitialized: false,
     store
 }));
+app.use(fileMiddleware.single('cv'));
 app.use(csrf());
 app.use(flash());
 app.use(varMiddleware);
@@ -61,6 +66,7 @@ app.use('/admin/subscribers', subscribersRouter);
 app.use('/admin/applicants', applicantsRouter);
 app.use('/mail', mailRouter);
 app.use('/apply', applyRouter);
+app.use(errorHandler);
 
 
 async function start() {

@@ -51,9 +51,8 @@ const editorText = (jsonText) => {
     let text = jsonText;
     try {
         text = JSON.parse(text);
-        console.log('parsed: ', text);
     } catch(err) {
-        console.log(err);
+        console.log('its a string');
     }
     if (typeof text === 'string') return text;
 

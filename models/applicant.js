@@ -11,7 +11,6 @@ const applicant = new Schema({
     },
     cv: {
         type: String,
-        required: true
     },
     message: {
         type: String,
