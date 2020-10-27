@@ -10,7 +10,11 @@ const applicant = new Schema({
         required: true
     },
     cv: {
-        type: String,
+        name: String,
+        file: {
+            data: Buffer, 
+            contentType: String 
+        }
     },
     message: {
         type: String,

@@ -6,7 +6,8 @@ const storage = multer.diskStorage({
         cb(null, 'cv');
     },
     filename(req, file, cb) {
-        cb(null, uuid() + '-' + file.originalname);
+        req.fileUuidName = uuid() + '-' + file.originalname;
+        cb(null, req.fileUuidName);
     }
 });
 

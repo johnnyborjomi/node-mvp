@@ -1,6 +1,9 @@
 const {Router} = require('express');
 const Applicant = require('../models/applicant');
 const router = Router();
+const fs = require('fs');
+const path = require('path');
+const file = require('../middleware/file');
 
 router.post('/', async (req, res) => {
     console.log('body:' ,req.body);
@@ -18,10 +21,16 @@ router.post('/', async (req, res) => {
                 createDate: new Date().toJSON(),
                 vacancyId
             }
-            console.log('file: ', req.file);
             if(req.file) {
-                applicantObj.cv = req.file.path;
+                applicantObj.cv = {
+                    name: req.fileUuidName,
+                    file: {
+                        data: fs.readFileSync(path.resolve(__dirname, '../cv', req.fileUuidName)),
+                        contentType: req.file.mimetype
+                    }
+                }
             }
+            console.log(applicantObj);
             const applicant = new Applicant(applicantObj);
             await applicant.save();
 
