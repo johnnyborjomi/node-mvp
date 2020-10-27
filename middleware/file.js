@@ -13,6 +13,7 @@ const storage = multer.diskStorage({
 const allowedTypes = ['application/pdf', 'image/jpg', 'image/jpeg', 'image/png', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 
 const fileFilter = (req, file, cb) => {
+    console.log('file mime:', file.mimetype);
     if (allowedTypes.includes(file.mimetype)) {
         cb(null, true);
     } else {

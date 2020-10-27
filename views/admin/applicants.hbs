@@ -21,6 +21,11 @@
                 <b>Vacancy Applied: </b><a href="/admin/vacancy/{{vacancyId.id}}">{{vacancyId.title}}</a>
                 <br>
                 <b>Vacancy salary: </b><span>{{money vacancyId.salary}}</span>
+                 <div class="row">
+                    <div class="col offset-s10 s2">
+                        <a href="/admin/applicants/{{id}}/delete?allow=true" class="btn right">Delete</a>
+                    </div>
+                </div>
             </div>
         </div>
     {{/each}}
