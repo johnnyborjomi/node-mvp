@@ -1,17 +1,42 @@
-const {Schema, model} = require('mongoose');
+// const {Schema, model} = require('mongoose');
 
-const adminSchema = new Schema({
+// const adminSchema = new Schema({
+//     login: {
+//         type: String,
+//         required: true
+//     },
+//     password: {
+//         type: String,
+//         required: true
+//     },
+//     name: {
+//         type: String
+//     }
+// });
+
+// module.exports = model('Admin', adminSchema);
+
+const Sequelize = require('sequelize');
+const sequelize = require('../utils/database');
+
+const adminSchema = sequelize.define('Admin', {
+    id: {
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+        type: Sequelize.INTEGER
+    },
     login: {
-        type: String,
-        required: true
+        type: Sequelize.STRING,
+        allowNull: false,
     },
     password: {
-        type: String,
-        required: true
+        type: Sequelize.STRING,
+        allowNull: false,
     },
     name: {
-        type: String
+        type: Sequelize.STRING
     }
 });
 
-module.exports = model('Admin', adminSchema);
+module.exports = adminSchema;

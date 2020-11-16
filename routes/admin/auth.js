@@ -36,7 +36,7 @@ router.get('/logout', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const {login, password} = req.body;                            
-        const candidate = await Admin.findOne({login});
+        const candidate = await Admin.findOne({ where: {login} });
         if (candidate) {
             console.log('Login: ', candidate);
             const passChecked = await bcrypt.compare(password, candidate.password);

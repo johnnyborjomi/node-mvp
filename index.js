@@ -3,9 +3,8 @@ const express = require('express');
 const path = require('path');
 const csrf = require('csurf');
 const flash = require('connect-flash');
-const mongoose = require('mongoose');
+const sequelize = require('./utils/database');
 const session = require('express-session');
-const MongoStore = require('connect-mongodb-session')(session);
 const chalk = require('chalk');
 const exphbs = require('express-handlebars');
 const hbsHelpers = require('./hbs-helpers/helpers');
@@ -25,10 +24,6 @@ const varMiddleware = require('./middleware/variables');
 const fileMiddleware = require('./middleware/file');
 
 const app = express();
-const store = new MongoStore({
-    collection: 'sessions',
-    uri: config.DB_URL
-})
 
 const hbs = exphbs.create({
     defaultLayout: 'main',
@@ -50,10 +45,9 @@ app.use(session({
     secret: config.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store
 }));
 app.use(fileMiddleware.single('cv'));
-app.use(csrf());
+// app.use(csrf());
 app.use(flash());
 app.use(varMiddleware);
 
@@ -71,12 +65,8 @@ app.use(errorHandler);
 
 async function start() {
     try {
-        console.log(chalk.yellow(`Connecting to DB URL: ${config.DB_URL}`))
-        await mongoose.connect(config.DB_URL, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-            useFindAndModify: false
-        });
+        console.log(chalk.yellow(`Connecting to DB: ${config.DB_NAME}`))
+        await sequelize.sync();
 
         app.listen(config.PORT, () => {
             console.log(chalk.underline.bold.blue(`Server running at port: ${config.PORT}`));
