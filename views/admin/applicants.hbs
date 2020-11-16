@@ -11,8 +11,10 @@
                 <b>Email: </b><span>{{email}}</span>
                 <br>
                 <b>CV: </b>
-                <a href="/{{cv}}" target="_blank" download>Download CV</a>
-                <br>Preview: <div class="cv-wrap"><img src="/{{cv}}" alt="{{fullName}}-cv"></div>
+                <a href="/cv/{{cv.name}}" target="_blank" download>Download CV</a>
+                {{#if cv.file.contentType}}
+                <br>Preview: <div class="cv-wrap"><img src="/cv/{{cv.name}}" alt="{{fullName}}-cv"></div>
+                {{/if}}
                 <br>
                 <b>Message: </b><span>{{message}}</span>
                 <br>
