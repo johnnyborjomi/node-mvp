@@ -5,7 +5,7 @@ exports.subscribeValidators = [
     body('email').isEmail()
         .withMessage('Invalid Email adress.').custom( async (value, {req}) => {
             try {
-                const subscriber = await Subscriber.findOne({email: value});
+                const subscriber = await Subscriber.findOne({ where: { email: value } } );
                 if (subscriber) {
                     return Promise.reject('User with these email already subscribed!');
                 }

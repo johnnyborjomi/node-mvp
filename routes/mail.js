@@ -45,13 +45,13 @@ router.post('/unsubscribe', async (req, res) => {
 router.post('/subscribe', subscribeValidators, async (req, res) => {
     console.log('body:' ,req.body);
     try {
-        // const error = validationResult(req);
-        // if (!error.isEmpty()) {
-        //     return res.status(422).json({
-        //         subscribed: false,
-        //         message: error.array()[0].msg
-        //     })
-        // }
+        const error = validationResult(req);
+        if (!error.isEmpty()) {
+            return res.status(422).json({
+                subscribed: false,
+                message: error.array()[0].msg
+            })
+        }
         const subscriber = await Subscriber.create({
             email: req.body.email,
         });

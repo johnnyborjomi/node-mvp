@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
         const vacancies = await Vacancy.findAll();
         // const templData = JSON.parse(JSON.stringify(vacancies));
         const templData = [];
-        vacancies.map(v => templData.push(v.toObject({getters: true})));
+        vacancies.map(v => templData.push(v.get()));
         res.render('vacancies', {
             title: 'Vacancies Page',
             isVacancies: true,
@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
     const data = await (await Vacancy.findByPk(+req.params.id));
     res.render('vacancy', {
         layout: 'single-page',
-        data: data
+        data: data.get()
     })
 })
 
