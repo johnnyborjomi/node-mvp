@@ -6,10 +6,10 @@ const authMW = require('../../middleware/admin-auth');
 const sendNewVacancyMail = require('../../emails/new-vacancy');
 
 router.get('/', authMW, async (req, res) => {
-    const vacancies = await Vacancy.find();
+    const vacancies = await Vacancy.findAll();
     // const templData = JSON.parse(JSON.stringify(vacancies));
     const templData = [];
-    vacancies.map(v => templData.push(v.toObject({getters: true})));
+    vacancies.map(v => templData.push(v.dataValues));
     res.render('admin/vacancies', {
         layout: 'admin',
         title: 'Vacancies Page',
@@ -48,12 +48,11 @@ router.post('/add', authMW, async (req, res) => {
             text: req.body.text,
             locations: req.body.locations,
             vacancyType: req.body.vacancyType,
-            createDate: new Date().toJSON()
         });
-        await vacancy.save();
+        // await vacancy.save();
         res.redirect('/admin/vacancy');
 
-        await sendNewVacancyMail(vacancy);
+        // await sendNewVacancyMail(vacancy);
     } catch (e) {
         console.log(e);
     }
