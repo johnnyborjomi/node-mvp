@@ -48,6 +48,7 @@ const selectOptions = (name, selected) => {
 }
 
 const editorText = (jsonText) => {
+    if(!jsonText) return;
     let text = jsonText;
     try {
         text = JSON.parse(text);

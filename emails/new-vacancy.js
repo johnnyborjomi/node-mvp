@@ -21,12 +21,12 @@ async function sendNewVacancyEmail(vacancyData) {
                     <h1>New vacancy Added!!!</h1>
                     <p><b>Title</b>: ${vacancyData.title}</p>
                     <p><b>Text</b>: ${vacancyData.text}</p>
-                    <a href="${config.BASE_URL}/vacancies/${vacancyData._id}">View new vacancy here.</a>
+                    <a href="${config.BASE_URL}/vacancies/${vacancyData.id}">View new vacancy here.</a>
                 `
         };
     };
 
-    const subscribers = await Subscriber.find();
+    const subscribers = await Subscriber.findAll();
     const emailToArr = subscribers.map(sub => sub.email);
     console.log('email to array: ', emailToArr);
 

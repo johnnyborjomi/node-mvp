@@ -52,7 +52,7 @@ router.post('/subscribe', subscribeValidators, async (req, res) => {
         //         message: error.array()[0].msg
         //     })
         // }
-        const subscriber = Subscriber.create({
+        const subscriber = await Subscriber.create({
             email: req.body.email,
         });
         res.status(200).json({

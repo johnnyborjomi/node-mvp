@@ -1,56 +1,37 @@
-// const {Schema, model} = require('mongoose');
-
-// const vacancy = new Schema({
-//     title: {
-//         type: String,
-//         required: true
-//     },
-//     salary: {
-//         type: Number,
-//         required: true,
-//     },
-//     text: {
-//         type: String,
-//         required: true
-//     },
-//     createDate: {
-//         type: String,
-//         required: true
-//     },
-//     locations: [String],
-//     vacancyType: String,
-// })
-
-// module.exports = model('Vacancy', vacancy);
-
-
-const Sequelize = require('sequelize');
-const sequelize = require('../utils/database');
+const {DataTypes} = require('sequelize');
+const {sequelize} = require('../utils/database');
 
 const vacancy = sequelize.define('Vacancy', {
     id: {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
     },
     title: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     salary: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     text: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     locations: {
-        type: Sequelize.STRING,
+        type: DataTypes.TEXT,
+        get() {
+            const data = this.getDataValue('locations');
+            return JSON.parse(data);
+        },
+        set(val) {
+            this.setDataValue('locations', JSON.stringify(val));
+        },
     },
     vacancyType: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
     },
 });
 

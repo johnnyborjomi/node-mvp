@@ -3,8 +3,8 @@ const express = require('express');
 const path = require('path');
 const csrf = require('csurf');
 const flash = require('connect-flash');
-const sequelize = require('./utils/database');
-const session = require('express-session');
+const {sequelize, sequelizeSessionStore, session} = require('./utils/database');
+
 const chalk = require('chalk');
 const exphbs = require('express-handlebars');
 const hbsHelpers = require('./hbs-helpers/helpers');
@@ -43,6 +43,7 @@ app.use(express.json());
 
 app.use(session({
     secret: config.SESSION_SECRET,
+    store: sequelizeSessionStore,
     resave: false,
     saveUninitialized: false,
 }));

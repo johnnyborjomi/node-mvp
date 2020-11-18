@@ -5,6 +5,13 @@ const DB_PASSWORD = '12345678';
 const MAIL_SERVICE = 'gmail';
 const MAIL_ACCOUNT = 'nodemailer.johnnyborjomi@gmail.com';
 const MAIL_PASS = 'NodemailerJohnnypass86';
+const SESSION_STORE_OPTIONS = {
+    host: 'localhost',
+    port: 3306,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME
+}
 
 module.exports = {
     BASE_URL,
@@ -16,4 +23,5 @@ module.exports = {
     MAIL_SERVICE,
     MAIL_ACCOUNT,
     MAIL_PASS,
+    SESSION_STORE_OPTIONS
 };

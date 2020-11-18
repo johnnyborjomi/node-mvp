@@ -17,7 +17,7 @@
 // module.exports = model('Admin', adminSchema);
 
 const Sequelize = require('sequelize');
-const sequelize = require('../utils/database');
+const {sequelize} = require('../utils/database');
 
 const adminSchema = sequelize.define('Admin', {
     id: {
