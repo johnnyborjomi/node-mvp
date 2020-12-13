@@ -37,6 +37,7 @@
 
 const Sequelize = require('sequelize');
 const {sequelize} = require('../utils/database');
+const vacancy = require('./vacancy');
 
 const applicant = sequelize.define('Applicant', {
     id: {
@@ -64,10 +65,9 @@ const applicant = sequelize.define('Applicant', {
     createDate: {
         type: Sequelize.STRING,
         allowNull: false,
-    },
-    vacancyId: {
-        type: Sequelize.STRING
     }
 });
+applicant.belongsTo(vacancy);
+vacancy.hasMany(applicant);
 
 module.exports = applicant;
