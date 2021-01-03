@@ -2,7 +2,7 @@ const {Router} = require('express');
 const Subscriber = require('../models/subscriber');
 const router = Router();
 const sendSubscrbMail = require('../emails/subs-success');
-const {validationResult} = require('express-validator/check');
+const {validationResult} = require('express-validator');
 const {subscribeValidators} = require('../utils/validators');
 
 router.get('/unsubscribe', async (req, res) => {
