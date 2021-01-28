@@ -6,10 +6,11 @@ const path = require('path');
 const file = require('../middleware/file');
 
 router.post('/', async (req, res) => {
-    console.log('body:' ,req.body);
+    console.log('body text:' , req.body);
     try {
         const {fullName, email, message, vacancyId} = req.body;
-        const candidate = await Applicant.findOne({email});
+        const candidate = await Applicant.findOne({where: {email}});
+        console.log(req.body)
         if(candidate) {
             req.flash('applyError', 'User with these email already applied.');
             res.redirect(`/vacancies/${vacancyId}`);
@@ -18,10 +19,9 @@ router.post('/', async (req, res) => {
                 fullName,
                 email,
                 message,
-                createDate: new Date().toJSON(),
-                vacancyId
+                VacancyId: vacancyId
             }
-            if(req.file) {
+            if (req.file) {
                 applicantObj.cv = {
                     name: req.fileUuidName,
                     file: {
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
                     }
                 }
             }
-            console.log(applicantObj);
+            console.log('obj:  ', applicantObj);
             const applicant = new Applicant(applicantObj);
             await applicant.save();
 

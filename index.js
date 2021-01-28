@@ -47,7 +47,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
 }));
-// app.use(fileMiddleware.single('cv'));
+app.use(fileMiddleware.single('cv'));
 // app.use(csrf());
 app.use(flash());
 app.use(varMiddleware);

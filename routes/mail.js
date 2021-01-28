@@ -8,7 +8,7 @@ const {subscribeValidators} = require('../utils/validators');
 router.get('/unsubscribe', async (req, res) => {
     console.log('unsub', req.query);
     const email = req.query.email;
-    const candidate = await Subscriber.findOne({email});
+    const candidate = await Subscriber.findOne({ where: {email} });
     console.log(candidate);
     res.render('unsubscribe', {
         layout: 'empty',
@@ -20,12 +20,12 @@ router.get('/unsubscribe', async (req, res) => {
 router.post('/unsubscribe', async (req, res) => {
     console.log('unsub', req.body.email);
     const email = req.body.email;
-    const candidate = await Subscriber.findOne({email});
+    const candidate = await Subscriber.findOne({ where: {email} });
     console.log('candidate: ' ,candidate);
     let isUnsubscribed = {value: null};
     try {
         if (candidate) {
-            await Subscriber.deleteOne({_id: candidate._id});
+            await Subscriber.destroy({where: {id: candidate.id}});
             isUnsubscribed.value = true;
         } else {
             isUnsubscribed.value = false;

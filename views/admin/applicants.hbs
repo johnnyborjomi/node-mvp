@@ -1,34 +1,34 @@
-
-
 <h1>Applicants List</h1>
 
 {{#if applicants.length}}
-    {{#each applicants }}
-        <div class="card hoverable">
-            <div class="card-content">
-                <b>Full Name: </b><span>{{fullName}}</span>
-                <br>
-                <b>Email: </b><span>{{email}}</span>
-                <br>
-                <b>CV: </b>
-                <a href="/{{cv}}" target="_blank" download>Download CV</a>
-                <br>Preview: <div class="cv-wrap"><img src="/{{cv}}" alt="{{fullName}}-cv"></div>
-                <br>
-                <b>Message: </b><span>{{message}}</span>
-                <br>
-                <b>Date Subscirbed: </b><span>{{dateFromJSONDate createDate}}</span>
-                <hr>
-                <b>Vacancy Applied: </b><a href="/admin/vacancy/{{vacancyId.id}}">{{vacancyId.title}}</a>
-                <br>
-                <b>Vacancy salary: </b><span>{{money vacancyId.salary}}</span>
-                 <div class="row">
-                    <div class="col offset-s10 s2">
-                        <a href="/admin/applicants/{{id}}/delete?allow=true" class="btn right">Delete</a>
-                    </div>
-                </div>
+{{#each applicants }}
+<div class="card hoverable">
+    <div class="card-content">
+        <b>Full Name: </b><span>{{fullName}}</span>
+        <br>
+        <b>Email: </b><span>{{email}}</span>
+        <br>
+        {{#if cv}}
+        <br>CV: </br>
+        <a href="/{{cv}}" target="_blank" download>Download CV</a>
+        <br>Preview: <div class="cv-wrap"><img src="/{{cv}}" alt="{{fullName}}-cv"></div>
+        <br>
+        {{/if}}
+        <b>Message: </b><span>{{message}}</span>
+        <br>
+        <b>Date Subscirbed: </b><span>{{dateFromJSONDate createDate}}</span>
+        <hr>
+        <b>Vacancy Applied: </b><a href="/admin/vacancy/{{Vacancy.dataValues.id}}">{{Vacancy.dataValues.title}}</a>
+        <br>
+        <b>Vacancy salary: </b><span>{{money Vacancy.dataValues.salary}}</span>
+        <div class="row">
+            <div class="col offset-s10 s2">
+                <a href="/admin/applicants/{{id}}/delete?allow=true" class="btn right">Delete</a>
             </div>
         </div>
-    {{/each}}
+    </div>
+</div>
+{{/each}}
 {{else}}
 <p>No Applicants.</p>
 {{/if}}

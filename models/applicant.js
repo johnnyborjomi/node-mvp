@@ -56,13 +56,9 @@ const applicant = sequelize.define('Applicant', {
     },
     cv: {
         type: Sequelize.STRING,
-        allowNull: false,
+        defaultValue: null
     },
     message: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    createDate: {
         type: Sequelize.STRING,
         allowNull: false,
     }
