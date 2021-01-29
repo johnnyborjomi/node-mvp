@@ -1,6 +1,6 @@
-import react from 'react';
-import ReactDom from 'react-dom';
-import AdminApp from './AdminApp';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import AdminApp from './AdminApp.jsx';
 
-ReactDom.render(<AdminApp />, document.getElementById('admin-root'));
+ReactDOM.render(<AdminApp />, document.getElementById('admin-root'));
 

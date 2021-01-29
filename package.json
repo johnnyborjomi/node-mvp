@@ -8,11 +8,15 @@
     "develop": "nodemon index.js",
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
-    "watch": "webpack --mode development --watch true"
+    "watch": "webpack --mode development --watch"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
     "chalk": "^4.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^4.3.0",
