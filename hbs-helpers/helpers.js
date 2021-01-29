@@ -72,12 +72,21 @@ const editorText = (jsonText) => {
     }, '');
 }
 
+const if_eq = (a, b, opts) => {
+    if (a == b) {
+        return opts.fn(this);
+    } else {
+        return opts.inverse(this);
+    }
+}
+
 module.exports = {
     dump,
     dateFromJSONDate,
     money,
     selectOptions,
-    editorText
+    editorText,
+    if_eq
 }
 
 

@@ -1,1 +1,5 @@
-<script src="/bundle.js" defer></script>
+{{#if_eq type 'admin'}}
+<script src="/admin.js" defer></script>
+{{else}}
+<script src="/client.js" defer></script>
+{{/if_eq}}

@@ -3,11 +3,13 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  watch: true,
-  entry: './src/index.js',
+  entry: {
+    client: './src/index.js',
+    admin: './src/admin-spa/index.js'
+  },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   devtool: 'source-map', 
   module: {

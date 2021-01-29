@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "build": "webpack"
+    "develop": "nodemon index.js",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development",
+    "watch": "webpack --mode development --watch true"
   },
   "author": "",
   "license": "ISC",
@@ -39,6 +41,8 @@
     "mongoose": "^5.10.7",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.13",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "uuid": "^8.3.0"
   }
 }
