@@ -128,3 +128,18 @@ hr {
 .cv-wrap {
   max-width: 200px;
 }
+
+.sidenav {
+  transition: transform .3s ease;
+
+  &.active {
+    transform: translateX(0px);
+  }
+
+  &-overlay {
+    &.active {
+      display: block; 
+      opacity: 1;
+    }
+  }
+}

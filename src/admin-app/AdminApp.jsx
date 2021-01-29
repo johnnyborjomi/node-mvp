@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
+import Layout from './Layout/Default.jsx';
 
 class AdminApp extends Component {
     render() {
         return (
-            <div>
-                Admin
-            </div>
+            <Layout>
+                <div>
+                    Admin
+                </div>
+            </Layout>
         )
     }
 }
