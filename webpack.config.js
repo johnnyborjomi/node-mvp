@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
   entry: {
     client: './src/index.js',
-    admin: './src/admin-spa/index.js'
+    admin: './src/admin-app/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'public'),
