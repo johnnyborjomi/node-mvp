@@ -10,7 +10,7 @@
     "dev": "webpack --mode development",
     "watch": "webpack --mode development --watch"
   },
-  "author": "",
+  "author": "Я",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -47,6 +47,8 @@
     "nodemailer": "^6.4.13",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "uuid": "^8.3.0"
   }
 }

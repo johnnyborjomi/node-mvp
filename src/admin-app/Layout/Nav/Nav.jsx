@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {NavLink} from 'react-router-dom';
 
 export default (props) => {
     const [isMenuOpen, toggleMenu] = useState(false);
@@ -13,10 +14,10 @@ export default (props) => {
     return (
         <nav className="red">
             <div className="nav-wrapper container">
-                <a href="/admin" className="brand-logo">Admin Panel</a>
+                <NavLink to="/" className="brand-logo">Admin Panel</NavLink>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/admin/dashboard">Admin Dashboard</a></li>
+                    <li><NavLink to="/login">Login</NavLink></li>
                         {/* if admin auth */}
                     <li><a href="/admin/logout">Log Out</a></li>
                     <li><small>Welcome, </small></li>

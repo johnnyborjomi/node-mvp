@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AdminApp from './AdminApp.jsx';
+import {BrowserRouter} from 'react-router-dom';
 
-ReactDOM.render(<AdminApp />, document.getElementById('admin-root'));
+const routedApp = (
+    <BrowserRouter basename="/admin-app">
+        <AdminApp />
+    </BrowserRouter>
+);
 
+ReactDOM.render(routedApp, document.getElementById('admin-root'));
