@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 
-export default () => {
+export default (props) => {
 
     const [login, setLogin] = useState();
     const [password, setPassword] = useState();
+    const [error, setError] = useState(false);
+    let data = null;
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -19,8 +21,15 @@ export default () => {
                 'X-XSRF-TOKEN': window.csrf
             }
         });
-        const data = await res.json();
-        console.log('res', data);
+        data = await res.json();
+        if(data.login === 'success') {
+            props.handleLogin();
+            props.history.push('/');
+            console.log(props)
+            
+        }else{
+            setError(true);
+        }
     }
 
     return (
@@ -52,9 +61,9 @@ export default () => {
                     <span className="helper-text" data-error="Fill Password"></span>
                 </div>
 
-                {/* {{#if error}} */}
-                    {/* <p className="form-message alert">{{error}}</p> */}
-                {/* {{/if}} */}
+                {error ?
+                    <p className="form-message alert">{data.message}</p> : null
+                }
 
                 <button type="submit" className="btn btn-primary">Log In</button>
             </form>

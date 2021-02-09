@@ -151,3 +151,8 @@ hr {
 .input-field > label {
   transform: translateY(-14px) scale(0.8) !important;
 }
+
+nav ul a.active {
+  text-decoration: underline;
+  background-color: rgba(0, 0, 0, 0.1);
+}

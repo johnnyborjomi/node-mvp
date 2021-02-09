@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AdminApp from './AdminApp.jsx';
+import {AdminApp} from './AdminApp.jsx';
 import {BrowserRouter} from 'react-router-dom';
 
 const routedApp = (

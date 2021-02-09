@@ -8,7 +8,7 @@ export default () => {
 
             <div className="card hoverable">
                 <div className="card-content">
-                    <NavLink to="/vacancy" className="card-title">Manage Vacancies</NavLink>
+                    <NavLink to="/vacancies" className="card-title">Manage Vacancies</NavLink>
                 </div>
             </div>
 
