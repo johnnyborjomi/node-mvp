@@ -8,7 +8,9 @@ export default (props) => {
             <header>
                 <Nav />
             </header>
-            <main>{ props.children }</main>
+            <main className="container main-wrapper">
+                { props.children }
+            </main>
         </div>
     )
 }

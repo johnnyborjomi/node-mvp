@@ -1,4 +1,3 @@
-const { compareSync } = require("bcryptjs");
 const moment = require('moment');
 
 const dump = (context) => {

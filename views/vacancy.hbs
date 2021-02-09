@@ -11,17 +11,17 @@
     </div>
 </div>
 {{#if data.locations.length}}
-    <div class="row">
-        <div class="col s12">
-            <b>Locations: </b>
-            {{#each data.locations}}
-                <span class="location">{{this}}</span>
-            {{/each}}
-        </div>
+<div class="row">
+    <div class="col s12">
+        <b>Locations: </b>
+        {{#each data.locations}}
+        <span class="location">{{this}}</span>
+        {{/each}}
     </div>
+</div>
 {{/if}}
 {{#if data.vacancyType}}
-    <p class="vacancy-type">{{data.vacancyType}}</p>
+<p class="vacancy-type">{{data.vacancyType}}</p>
 {{/if}}
 <div class="row">
     <div class="col s12">
@@ -63,7 +63,8 @@
     </div>
 
     <div class="input-field">
-        <textarea placeholder="Message" name="message" id="message" required class="validate materialize-textarea"></textarea>
+        <textarea placeholder="Message" name="message" id="message" required
+            class="validate materialize-textarea"></textarea>
         <label for="text">Message</label>
         <span class="helper-text" data-error="Fill Message"></span>
     </div>
@@ -78,4 +79,3 @@
 <hr>
 
 {{> subscribe-form}}
-
