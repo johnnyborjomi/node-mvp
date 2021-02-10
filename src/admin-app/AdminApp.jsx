@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import Layout from './Layout/Default.jsx';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import LoginPage from './Pages/Login-page.jsx';
@@ -9,39 +9,55 @@ export const AppContext = React.createContext();
 
 export const AdminApp = () => {
 
-    const [isLogedIn, login] = useState(false);
+    const [isLoggedIn, login] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const appContext = {
         auth: {
-            isLogedIn,
-            login: () => login(true),
+            isLoggedIn,
+            login: () => login(true), 
             logout: () => login(false)
         }
     }
+
+    useEffect(async () => {
+        console.log(isLoggedIn)
+        const res = await fetch('/admin-api/auth/check');
+        const data = await res.json();
+        console.log(isLoggedIn)
+        data.isLoggedIn ? login(true) : login(false);
+        setIsLoading(false);
+        console.log(isLoggedIn)
+
+    })
 
     return (
         <AppContext.Provider value={appContext}>
         <Layout>
             {
-                isLogedIn ? 
-                <Switch>
-                    <Route path="/" exact component={DashPage} />
-                    <Route path="/vacancies" render={() => <div>vacancies</div>} />
-                    <Route path="/subscribers" render={() => <div>subscribers</div>} />
-                    <Route path="/applicants" render={() => <div>applicants</div>} />
-                    <Route component={NotFoundPage} />
-                </Switch> : 
-                <Switch>
-                    <Route 
-                        path="/login" 
-                        render={props => <LoginPage 
-                            {...props}
-                            isLogedIn={isLogedIn}
-                            handleLogin={() => login(true)}
-                            />} 
-                    />
-                    <Redirect from={'/'} to={'/login'}/>
-                </Switch>
+                isLoading ?
+                    null :
+                    isLoggedIn ? 
+                    <Switch>
+                        <Route path="/" exact component={DashPage} />
+                        <Route path="/vacancies" render={() => <div>vacancies</div>} />
+                        <Route path="/subscribers" render={() => <div>subscribers</div>} />
+                        <Route path="/applicants" render={() => <div>applicants</div>} />
+                        <Redirect from={'/login'} to={'/'}/>
+                        <Route component={NotFoundPage} />
+                    </Switch> 
+                    : 
+                    <Switch>
+                        <Route 
+                            path="/login" 
+                            render={props => <LoginPage 
+                                {...props}
+                                isLoggedIn={isLoggedIn}
+                                handleLogin={() => login(true)}
+                                />} 
+                        />
+                        <Redirect from={'/'} to={'/login'}/>
+                    </Switch> 
             }
             
         </Layout>

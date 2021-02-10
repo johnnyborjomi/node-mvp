@@ -13,7 +13,8 @@ const hbsHelpers = require('./hbs-helpers/helpers');
 const homeRouter = require('./routes/home');
 const aboutRouter = require('./routes/about');
 const vacanciesRouter = require('./routes/vacancies');
-const adminRouter = require('./routes/admin/app');
+const adminAppRouter = require('./routes/admin/app');
+const adminApiRouter = require('./routes/admin/app-api');
 const adminAuthRouter = require('./routes/admin/auth');
 const adminVacanciesRouter = require('./routes/admin/vacancy');
 const mailRouter = require('./routes/mail');
@@ -51,7 +52,10 @@ app.use(session({
     secret: config.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store
+    store,
+    cookie: {
+        maxAge: 60 * 1000 * 10
+    }
 }));
 app.use(fileMiddleware.single('cv'));
 app.use(csrf());
@@ -61,7 +65,8 @@ app.use(varMiddleware);
 app.use('/', homeRouter);
 app.use('/about', aboutRouter);
 app.use('/vacancies', vacanciesRouter);
-app.use('/admin-app', adminRouter);
+app.use('/admin-api', adminApiRouter);
+app.use('/admin-app', adminAppRouter);
 app.use('/admin', adminAuthRouter);
 app.use('/admin/vacancy', adminVacanciesRouter);
 app.use('/admin/subscribers', subscribersRouter);

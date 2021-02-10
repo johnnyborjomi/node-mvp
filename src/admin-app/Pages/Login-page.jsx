@@ -4,13 +4,13 @@ export default (props) => {
 
     const [login, setLogin] = useState();
     const [password, setPassword] = useState();
-    const [error, setError] = useState(false);
+    const [error, setError] = useState('');
     let data = null;
 
     const submitHandler = async (e) => {
         e.preventDefault();
         console.log('submin');
-        const res = await fetch('/admin-app/login', {
+        const res = await fetch('/admin-api/auth/login', {
             method: 'POST',
             body: JSON.stringify({
                 login,
@@ -22,13 +22,14 @@ export default (props) => {
             }
         });
         data = await res.json();
+        console.log(data)
         if(data.login === 'success') {
             props.handleLogin();
             props.history.push('/');
             console.log(props)
             
         }else{
-            setError(true);
+            setError(data.message);
         }
     }
 
@@ -62,7 +63,7 @@ export default (props) => {
                 </div>
 
                 {error ?
-                    <p className="form-message alert">{data.message}</p> : null
+                    <p className="form-message alert">{error}!</p> : null
                 }
 
                 <button type="submit" className="btn btn-primary">Log In</button>

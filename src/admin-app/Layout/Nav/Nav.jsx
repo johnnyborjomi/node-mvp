@@ -12,6 +12,13 @@ export default (props) => {
         toggleMenu(!isMenuOpen);
     }
 
+    const logOut = async () => {
+        const res = await fetch('/admin-api/auth/logout');
+        const data = await res.json();
+        data.isLoggedOut ? appContext.auth.logout() : null;
+        document.location.reload();
+    }
+
     const menuClass = isMenuOpen ? 'active' : '';
     
     return (
@@ -21,10 +28,10 @@ export default (props) => {
                 <ul className="right hide-on-med-and-down">
                     <li><a href="/">Home</a></li>
                     {
-                        appContext.auth.isLogedIn ?
+                        appContext.auth.isLoggedIn ?
                         <>
                         <li><NavLink exact to="/">Dashboard</NavLink></li>
-                        <li><a onClick={appContext.auth.logout}>Log Out</a></li>
+                        <li><a onClick={logOut}>Log Out</a></li>
                         <li><small>Welcome, Admin</small></li>
                         </> :
                         <li><NavLink to="/login">Login</NavLink></li>
@@ -37,8 +44,8 @@ export default (props) => {
                     <ul className="left">
                         <li><a href="/">Home</a></li>
                         {
-                            appContext.auth.isLogedIn ?
-                            <li><a onClick={appContext.auth.logout}>Log Out</a></li> :
+                            appContext.auth.isLoggedIn ?
+                            <li><a onClick={logOut}>Log Out</a></li> :
                             <li><NavLink to="/login">Login</NavLink></li>
                         }
                         <li><NavLink exact to="/">Dashboard</NavLink></li>
