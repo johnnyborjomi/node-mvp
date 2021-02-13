@@ -54,7 +54,7 @@ app.use(session({
     saveUninitialized: false,
     store,
     cookie: {
-        maxAge: 60 * 1000 * 10
+        maxAge: 60 * 1000 * 20
     }
 }));
 app.use(fileMiddleware.single('cv'));

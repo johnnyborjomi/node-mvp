@@ -1,6 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 const Admin = require('../../models/admin');
+const Vacancy = require('../../models/vacancy');
 const bcrypt = require('bcryptjs');
 
 router.get('/auth/check', async (req, res) => {
@@ -63,5 +64,15 @@ router.post('/auth/login', async (req, res) => {
         console.log(err);
     }
 })
+
+router.get('/vacancies', async (req, res) => {
+    const vacancies = await Vacancy.find();
+    // const templData = JSON.parse(JSON.stringify(vacancies));
+    const templData = [];
+    vacancies.map(v => templData.push(v.toObject({getters: true})));
+    res.send(
+        JSON.stringify(templData.reverse())
+    );
+});
 
 module.exports = router;

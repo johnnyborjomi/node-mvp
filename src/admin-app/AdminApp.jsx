@@ -3,6 +3,7 @@ import Layout from './Layout/Default.jsx';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import LoginPage from './Pages/Login-page.jsx';
 import DashPage from './Pages/Dash-page.jsx';
+import VacanciesPage from './Pages/Vacancies-page.jsx';
 import NotFoundPage from './Pages/Notfound-page.jsx';
 
 export const AppContext = React.createContext();
@@ -28,7 +29,6 @@ export const AdminApp = () => {
         data.isLoggedIn ? login(true) : login(false);
         setIsLoading(false);
         console.log(isLoggedIn)
-
     })
 
     return (
@@ -40,7 +40,7 @@ export const AdminApp = () => {
                     isLoggedIn ? 
                     <Switch>
                         <Route path="/" exact component={DashPage} />
-                        <Route path="/vacancies" render={() => <div>vacancies</div>} />
+                        <Route path="/vacancies" render={() => <VacanciesPage vacancies={[]}/>} />
                         <Route path="/subscribers" render={() => <div>subscribers</div>} />
                         <Route path="/applicants" render={() => <div>applicants</div>} />
                         <Redirect from={'/login'} to={'/'}/>
