@@ -2,6 +2,9 @@ const {Router} = require('express');
 const router = Router();
 const Admin = require('../../models/admin');
 const Vacancy = require('../../models/vacancy');
+const Subscibers = require('../../models/subscriber');
+const Applicant = require('../../models/applicant');
+
 const bcrypt = require('bcryptjs');
 
 router.get('/auth/check', async (req, res) => {
@@ -70,6 +73,27 @@ router.get('/vacancies', async (req, res) => {
     // const templData = JSON.parse(JSON.stringify(vacancies));
     const templData = [];
     vacancies.map(v => templData.push(v.toObject({getters: true})));
+    res.send(
+        JSON.stringify(templData.reverse())
+    );
+});
+
+router.get('/subscribers', async (req, res) => {
+    const subs = await Subscibers.find();
+    const templData = [];
+    subs.map(s => templData.push(s.toObject({getters: true})));
+    console.log(templData)
+    res.send(
+        JSON.stringify(templData.reverse())
+    );
+});
+
+router.get('/applicants', async (req, res) => {
+    const subs = await Applicant.find()
+        .populate('vacancyId');
+    const templData = [];
+    subs.map(s => templData.push(s.toObject({getters: true})));
+    console.log(templData)
     res.send(
         JSON.stringify(templData.reverse())
     );

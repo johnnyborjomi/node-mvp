@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 
-export default () => {
+export default props => {
+
+    useEffect(() => {
+        document.title = props.title;
+    })
+
     return (
         <>
             <h1>Dashboard</h1>

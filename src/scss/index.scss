@@ -156,3 +156,13 @@ nav ul a.active {
   text-decoration: underline;
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.card.hoverable {
+  overflow: hidden;
+  
+  .card-reveal {
+    display: block;
+    transform: translateY(0%);
+    transition: transform .3s ease;
+  }
+}

@@ -4,6 +4,8 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import LoginPage from './Pages/Login-page.jsx';
 import DashPage from './Pages/Dash-page.jsx';
 import VacanciesPage from './Pages/Vacancies-page.jsx';
+import SubsPage from './Pages/Subs-page.jsx';
+import ApplicantsPage from './Pages/Applicants-page.jsx';
 import NotFoundPage from './Pages/Notfound-page.jsx';
 
 export const AppContext = React.createContext();
@@ -39,10 +41,25 @@ export const AdminApp = () => {
                     null :
                     isLoggedIn ? 
                     <Switch>
-                        <Route path="/" exact component={DashPage} />
-                        <Route path="/vacancies" render={() => <VacanciesPage vacancies={[]}/>} />
-                        <Route path="/subscribers" render={() => <div>subscribers</div>} />
-                        <Route path="/applicants" render={() => <div>applicants</div>} />
+                        <Route 
+                            path="/" 
+                            exact 
+                            render={props => <DashPage title="Admin Dashboard"/>} 
+                        />
+                        <Route 
+                            path="/vacancies" 
+                            render={
+                                props => <VacanciesPage {...props} title="Vacancies Page"/>
+                            } 
+                        />
+                        <Route 
+                            path="/subscribers" 
+                            render={props => <SubsPage {...props} title="Subscribers Page"/>} 
+                        />
+                        <Route 
+                            path="/applicants" 
+                            render={props => <ApplicantsPage {...props} title="ApplicantsPage"/>} 
+                        />
                         <Redirect from={'/login'} to={'/'}/>
                         <Route component={NotFoundPage} />
                     </Switch> 
