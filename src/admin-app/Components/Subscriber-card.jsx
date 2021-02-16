@@ -1,5 +1,5 @@
 import React from 'react';
-import {dateFromJSONDate} from '../../helpers';
+import {dateFromJSONDate} from '../Vendors/helpers';
 
 export default ({subscriber}) => {
     return (

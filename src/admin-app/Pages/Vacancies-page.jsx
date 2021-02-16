@@ -27,7 +27,7 @@ export default props => {
                 <h1>Vacancies List</h1>
             </div>
             <div className="col s4">
-                <Link to="/admin-app/vacancy/add" className="btn green right">Add new vacancy</Link>
+                <Link to="/vacancy/add" className="btn green right">Add new vacancy</Link>
             </div>
         </div>
 

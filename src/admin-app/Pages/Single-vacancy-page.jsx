@@ -1,6 +1,6 @@
 import React, {useState ,useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import {dateFromJSONDate, money, editorText} from '../../helpers';
+import {dateFromJSONDate, money, editorText} from '../Vendors/helpers';
 
 export default props => {
     console.log(props)

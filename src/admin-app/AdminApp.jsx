@@ -5,6 +5,7 @@ import LoginPage from './Pages/Login-page.jsx';
 import DashPage from './Pages/Dash-page.jsx';
 import VacanciesPage from './Pages/Vacancies-page.jsx';
 import SingleVacancyPage from './Pages/Single-vacancy-page.jsx';
+import VacancyAddPage from './Pages/Vacancy-add.jsx';
 import VacancyDeletePage from './Pages/Vacancy-delete.jsx';
 import VacancyEditPage from './Pages/Vacancy-edit.jsx';
 import SubsPage from './Pages/Subs-page.jsx';
@@ -56,6 +57,13 @@ export const AdminApp = () => {
                             } 
                         />
                         <Route 
+                            path="/vacancy/add" 
+                            exact
+                            render={
+                                props => <VacancyAddPage {...props}/>
+                            } 
+                        />
+                        <Route 
                             path="/vacancy/:id" 
                             exact
                             render={
@@ -67,6 +75,13 @@ export const AdminApp = () => {
                             exact
                             render={
                                 props => <VacancyDeletePage {...props}/>
+                            } 
+                        />
+                        <Route 
+                            path="/vacancy/:id/edit" 
+                            exact
+                            render={
+                                props => <VacancyEditPage {...props}/>
                             } 
                         />
                         <Route 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {dateFromJSONDate, money} from '../../helpers';
+import {dateFromJSONDate, money} from '../Vendors/helpers';
 
 export default ({applicant}) => {
     const {fullName, email, cv, createDate, vacancyId, message} = applicant;

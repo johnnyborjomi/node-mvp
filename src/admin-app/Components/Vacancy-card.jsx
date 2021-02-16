@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {dateFromJSONDate, money, editorText} from '../../helpers';
+import {dateFromJSONDate, money, editorText} from '../Vendors/helpers';
 
 const toggledStyle = {
     transform: 'translateY(-100%)'
