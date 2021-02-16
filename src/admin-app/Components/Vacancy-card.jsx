@@ -43,21 +43,21 @@ export default ({vacancy}) => {
                 <div className="row">
                     <div className="col s2">
                         <Link 
-                            to={'/admin-app/vacancy/' + vacancy.id} 
+                            to={'/vacancy/' + vacancy.id} 
                             className="btn hollow left">
                                 View
                         </Link>
                     </div>
                     <div className="col offset-s7 s2">
                         <Link 
-                            to={`/admin-app/vacancy/${vacancy.id}/delete?allow=true`} 
+                            to={`/vacancy/${vacancy.id}/delete?allow=true`} 
                             className="btn right">
                                 Delete
                         </Link>
                     </div>
                     <div className="col s1">
                         <Link 
-                            to={`/admin-app/vacancy/${vacancy.id}/edit?allow=true`} 
+                            to={`/vacancy/${vacancy.id}/edit?allow=true`} 
                             className="btn green right">
                                 Edit
                         </Link>

@@ -4,6 +4,7 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import LoginPage from './Pages/Login-page.jsx';
 import DashPage from './Pages/Dash-page.jsx';
 import VacanciesPage from './Pages/Vacancies-page.jsx';
+import SingleVacancyPage from './Pages/Single-vacancy-page.jsx';
 import SubsPage from './Pages/Subs-page.jsx';
 import ApplicantsPage from './Pages/Applicants-page.jsx';
 import NotFoundPage from './Pages/Notfound-page.jsx';
@@ -50,6 +51,13 @@ export const AdminApp = () => {
                             path="/vacancies" 
                             render={
                                 props => <VacanciesPage {...props} title="Vacancies Page"/>
+                            } 
+                        />
+                        <Route 
+                            path="/vacancy/:id" 
+                            exact
+                            render={
+                                props => <SingleVacancyPage {...props}/>
                             } 
                         />
                         <Route 

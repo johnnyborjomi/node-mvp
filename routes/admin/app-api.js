@@ -78,6 +78,13 @@ router.get('/vacancies', async (req, res) => {
     );
 });
 
+router.get('/vacancy/:id', async (req, res) => {
+    const data = await (await Vacancy.findById(req.params.id)).toObject({getters: true});
+    res.send(
+        JSON.stringify(data)
+    );
+})
+
 router.get('/subscribers', async (req, res) => {
     const subs = await Subscibers.find();
     const templData = [];
