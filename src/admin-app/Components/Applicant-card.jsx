@@ -28,7 +28,7 @@ export default ({applicant}) => {
                 <b>Vacancy salary: </b><span>{money(vacancyId.salary)}</span>
                 <div className="row">
                     <div className="col offset-s10 s2">
-                        <a href={`/admin-app/applicants/${vacancyId.id}/delete?allow=true`} className="btn right">Delete</a>
+                        <a href={`/admin-app/applicants/${vacancyId.id}/delete`} className="btn right">Delete</a>
                     </div>
                 </div>
             </div>

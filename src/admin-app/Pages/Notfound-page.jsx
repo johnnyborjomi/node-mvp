@@ -6,7 +6,7 @@ export default () => {
         <>
             <h1>404 Error</h1>
             <p>Page not found</p>
-            <NavLink to="/">Home page</NavLink>
+            <NavLink to="/">Back to dashboard</NavLink>
         </>
     )
 }

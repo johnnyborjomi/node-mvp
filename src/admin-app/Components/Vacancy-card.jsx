@@ -50,14 +50,14 @@ export default ({vacancy}) => {
                     </div>
                     <div className="col offset-s7 s2">
                         <Link 
-                            to={`/vacancy/${vacancy.id}/delete?allow=true`} 
+                            to={`/vacancy/${vacancy.id}/delete`} 
                             className="btn right">
                                 Delete
                         </Link>
                     </div>
                     <div className="col s1">
                         <Link 
-                            to={`/vacancy/${vacancy.id}/edit?allow=true`} 
+                            to={`/vacancy/${vacancy.id}/edit`} 
                             className="btn green right">
                                 Edit
                         </Link>

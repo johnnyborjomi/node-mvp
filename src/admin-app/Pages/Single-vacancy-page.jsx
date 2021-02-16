@@ -27,10 +27,10 @@ export default props => {
         </div>
         <div className="row right">
             <div className="col">
-                <Link to={`/vacancy/${data.id}/delete?allow=true`} className="btn right">Delete</Link>
+                <Link to={`/vacancy/${data.id}/delete`} className="btn right">Delete</Link>
             </div>
             <div className="col">
-                <Link to={`/vacancy/${data.id}/edit?allow=true`} className="btn green right">Edit</Link>
+                <Link to={`/vacancy/${data.id}/edit`} className="btn green right">Edit</Link>
             </div>
         </div>
         <div className="row">

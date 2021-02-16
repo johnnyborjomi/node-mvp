@@ -79,10 +79,32 @@ router.get('/vacancies', async (req, res) => {
 });
 
 router.get('/vacancy/:id', async (req, res) => {
-    const data = await (await Vacancy.findById(req.params.id)).toObject({getters: true});
-    res.send(
-        JSON.stringify(data)
-    );
+    try {
+        const data = await (await Vacancy.findById(req.params.id)).toObject({getters: true});
+        res.send(
+            JSON.stringify(data)
+        );
+    } catch(err) {
+        console.log(err);
+        res.status(404).send(
+            JSON.stringify({error: true, message: 'Vacancy not found'})
+        )
+    }
+    
+})
+
+router.post('/vacancy/delete', async (req, res) => {
+    try {
+        await Vacancy.deleteOne({_id: req.body.id});
+        res.send(
+            JSON.stringify({deleted: 'success', message: 'Successfully deleted'})
+        )
+    } catch (e) {
+        console.log(e);
+        res.send(
+            JSON.stringify({deleted: 'error', message: 'Something went wrong'})
+        )
+    }
 })
 
 router.get('/subscribers', async (req, res) => {

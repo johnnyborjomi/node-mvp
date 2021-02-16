@@ -5,6 +5,8 @@ import LoginPage from './Pages/Login-page.jsx';
 import DashPage from './Pages/Dash-page.jsx';
 import VacanciesPage from './Pages/Vacancies-page.jsx';
 import SingleVacancyPage from './Pages/Single-vacancy-page.jsx';
+import VacancyDeletePage from './Pages/Vacancy-delete.jsx';
+import VacancyEditPage from './Pages/Vacancy-edit.jsx';
 import SubsPage from './Pages/Subs-page.jsx';
 import ApplicantsPage from './Pages/Applicants-page.jsx';
 import NotFoundPage from './Pages/Notfound-page.jsx';
@@ -58,6 +60,13 @@ export const AdminApp = () => {
                             exact
                             render={
                                 props => <SingleVacancyPage {...props}/>
+                            } 
+                        />
+                        <Route 
+                            path="/vacancy/:id/delete" 
+                            exact
+                            render={
+                                props => <VacancyDeletePage {...props}/>
                             } 
                         />
                         <Route 
