@@ -23,14 +23,19 @@ export default ({applicant}) => {
                 <br/>
                 <b>Date Subscirbed: </b><span>{dateFromJSONDate(createDate)}</span>
                 <hr/>
-                <b>Vacancy Applied: </b><a href={`/admin-app/vacancy/${vacancyId.id}`}>{vacancyId.title}</a>
-                <br/>
-                <b>Vacancy salary: </b><span>{money(vacancyId.salary)}</span>
-                <div className="row">
-                    <div className="col offset-s10 s2">
-                        <a href={`/admin-app/applicants/${vacancyId.id}/delete`} className="btn right">Delete</a>
+                {vacancyId ? 
+                    <>
+                    <b>Vacancy Applied: </b><a href={`/admin-app/vacancy/${vacancyId.id}`}>{vacancyId.title}</a>
+                    <br/>
+                    <b>Vacancy salary: </b><span>{money(vacancyId.salary)}</span>
+                    <div className="row">
+                        <div className="col offset-s10 s2">
+                            <a href={`/admin-app/applicants/${vacancyId.id}/delete`} className="btn right">Delete</a>
+                        </div>
                     </div>
-                </div>
+                    </>
+                    : <p className="form-message alert">This vacancy has been removed!</p>
+                }
             </div>
         </div>
     );

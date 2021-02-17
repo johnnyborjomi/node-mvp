@@ -21,12 +21,8 @@ export default props => {
         isLoading ?
         null:
         <>
-        <div className="spacer"></div>
         <div className="row">
-            <div className="col s8">
-                <h1>Vacancies List</h1>
-            </div>
-            <div className="col s4">
+            <div className="col right">
                 <Link to="/vacancy/add" className="btn green right">Add new vacancy</Link>
             </div>
         </div>

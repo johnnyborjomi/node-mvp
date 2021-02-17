@@ -11,6 +11,7 @@ import VacancyEditPage from './Pages/Vacancy-edit.jsx';
 import SubsPage from './Pages/Subs-page.jsx';
 import ApplicantsPage from './Pages/Applicants-page.jsx';
 import NotFoundPage from './Pages/Notfound-page.jsx';
+import RootPage from './hoc/RootPage';
 
 export const AppContext = React.createContext();
 
@@ -52,9 +53,15 @@ export const AdminApp = () => {
                         />
                         <Route 
                             path="/vacancies" 
-                            render={
-                                props => <VacanciesPage {...props} title="Vacancies Page"/>
-                            } 
+                            render={props => {
+                                return (
+                                    <RootPage 
+                                        title="Vacancies Page"
+                                        breadcrumbs={[{name: "Vacancies"}]}>
+                                        <VacanciesPage {...props} />
+                                    </RootPage>
+                                );
+                            }}
                         />
                         <Route 
                             path="/vacancy/add" 
@@ -86,11 +93,27 @@ export const AdminApp = () => {
                         />
                         <Route 
                             path="/subscribers" 
-                            render={props => <SubsPage {...props} title="Subscribers Page"/>} 
+                            render={props => {
+                                return (
+                                    <RootPage 
+                                        title="Subscribers Page"
+                                        breadcrumbs={[{name: "Subscribers"}]}>
+                                        <SubsPage {...props} />
+                                    </RootPage>
+                                )
+                            }} 
                         />
                         <Route 
                             path="/applicants" 
-                            render={props => <ApplicantsPage {...props} title="ApplicantsPage"/>} 
+                            render={props => {
+                                return (
+                                    <RootPage 
+                                        title="Applicants Page" 
+                                        breadcrumbs={[{name: "Applicants"}]}>
+                                        <ApplicantsPage {...props} />
+                                    </RootPage>
+                                );
+                            }} 
                         />
                         <Redirect from={'/login'} to={'/'}/>
                         <Route component={NotFoundPage} />
