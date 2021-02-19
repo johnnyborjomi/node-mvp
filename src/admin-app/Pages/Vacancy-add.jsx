@@ -1,12 +1,32 @@
+import {debounce} from 'lodash';
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import initEditor from '../Vendors/editor';
 import initSelect from '../Vendors/m-select';
+import Input from '../Components/Input.jsx';
+import Select from '../Components/Select.jsx';
 
+
+const selects = {
+    'locations': [
+        "Kharkov, Ukraine",
+        "Kiev, Ukraine",
+        "Wrozlav, Poland",
+        "London, UK",
+        "New York, US",
+        "Los Angeles, US",
+    ],
+    'vacancyTypes': [
+        "Remote - Full Time",
+        "Remote - Part Time",
+        "Office - Full Time",
+        "Office - Part Time",
+    ]
+};
 
 export default props => {
     const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
+    const [formData, setFormData] = useState({});
 
     useEffect(() => {
         initEditor();
@@ -15,70 +35,95 @@ export default props => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        console.log('delete');
-        const res = await fetch('/admin-api/vacancy/delete', {
-            method: 'POST',
-            body: JSON.stringify({
-                id: data.id
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                'X-XSRF-TOKEN': window.csrf
+        let data;
+        try {
+            const res = await fetch('/admin-api/vacancy/add', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-XSRF-TOKEN': window.csrf
+                }
+            });
+            data = await res.json();
+            if(res.status !== 200) {
+                handleError(data);
+            } else {
+                props.history.push(`/vacancy/${data.vacancyId}`);
             }
-        });
-        data = await res.json();
-        console.log(data)
-        if(data.deleted === 'success') {
-            setSuccess(data.message);
-            // setTimeout(() => {
-            //     props.history.push('/vacancies');
-            // }, 5000)
-        }else{
-            setError(data.message);
+            
+        } catch(e) {
+            console.log(e);
+            handleError(data);
         }
     }
 
+    const handleError = data => {
+        if(data.message) {
+            setError(data.message)
+        } else {
+            setError('Something went wrong!');
+        }
+    }
+
+    const onInputChange = e => {
+        console.log('change: ', e.target.name);
+        const newFormData = {...formData};
+        newFormData[e.target.name] = e.target.value;
+        setFormData(newFormData);
+    } 
+
+    const debouncedInputChange = debounce(onInputChange, 500);
+
     return (
         <>
-            <h1>Add New Vacancy</h1>
-
             <form className="form-with-editor">
-                <div className="input-field">
-                    <input placeholder="Vacancy Title" name="title" id="title" type="text" required className="validate"/>
-                    <label htmlFor="title">Vacancy Title</label>
-                    <span className="helper-text" data-error="Fill Title"></span>
-                </div>
-                <div className="input-field">
-                    <input placeholder="Salary Range" name="salary" id="salary" type="number" required className="validate"/>
-                    <label htmlFor="title">Salary Range</label>
-                    <span className="helper-text" data-error="Fill Salary Range"></span>
-                </div>
-                <div className="spacer"></div>
-                <div className="input-field">
-                    <select name="locations" multiple id="location">
-                        <option>Choose Location</option>
-                    </select>
-                    <label htmlFor="location">Location</label>
-                </div>
-                <div className="spacer"></div>
-
-                <div className="input-field">
-                    <select name="vacancyType" id="vacancyType">
-                        <option>Choose Vacancy Type</option>
-                    </select>
-                    <label htmlFor="vacancyType">Vacancy Type</label>
-                </div>
-                <div className="spacer"></div>
+                <Input
+                    placeholder="Vacancy Title"
+                    name="title" 
+                    type="text" 
+                    required="true"
+                    handler={debouncedInputChange}
+                />
+                <Input
+                    placeholder="Salary Range"
+                    name="salary" 
+                    type="number" 
+                    required="true"
+                    handler={debouncedInputChange}
+                />
+                <Select 
+                    options={selects.locations}
+                    placeholder="Location"
+                    name="location"
+                    handler={debouncedInputChange}
+                />
+                <Select 
+                    options={selects.vacancyTypes}
+                    placeholder="Vacancy Type"
+                    name="vacancyType"
+                    handler={debouncedInputChange}
+                />
                 <label htmlFor="text">Vacancy Text</label>
                 <div className="spacer-md"></div>
                 <div id="editorjs" className="editorjs"></div>
                 <div className="spacer"></div>
-                <input type="hidden" name="text" id="text" required className="editor-textinput"/>
+                <input 
+                    style={{display: 'none'}}
+                    name="text" 
+                    onChange={onInputChange} 
+                    required 
+                    className="editorjs-textinput"/>
 
-                <button className="btn btn-primary">Post Vacancy</button>
+                {error ?
+                    <p className={'form-message alert'}>
+                        {error}
+                    </p> : null
+                }
+
+                <input onClick={submitHandler} type="submit" value="Post Vacancy" className="btn btn-primary"/>
             </form>
             <div className="spacer"></div>
-
         </>
     );
 }

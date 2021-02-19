@@ -42,6 +42,7 @@
     "express-handlebars": "^5.1.0",
     "express-session": "^1.17.1",
     "express-validator": "^6.6.1",
+    "lodash": "^4.17.20",
     "materialize-css": "^1.0.0-rc.2",
     "moment": "^2.29.1",
     "mongoose": "^5.10.7",

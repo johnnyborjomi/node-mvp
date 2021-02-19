@@ -1,6 +1,6 @@
 import React, {useState ,useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import {dateFromJSONDate, money, editorText} from '../Vendors/helpers';
+import {fullDateFromJSON, money, editorText} from '../Vendors/helpers';
 
 export default props => {
     console.log(props)
@@ -40,7 +40,7 @@ export default props => {
             <div className="col s4 align-right">
                 <p className="right-align">
                     <b>Posted: </b>
-                    {dateFromJSONDate(data.createDate)}
+                    {fullDateFromJSON(data.createDate)}
                 </p>
             </div>
         </div>

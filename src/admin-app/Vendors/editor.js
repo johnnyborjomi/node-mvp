@@ -1,23 +1,26 @@
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header'; 
 import List from '@editorjs/list'; 
+import {debounce} from 'lodash';
 
 export default () => {
     const editorElem = document.querySelector('#editorjs');
-    const formWithEditor = document.querySelector('.form-with-editor');
+    const editorInput = document.querySelector('.editorjs-textinput');
 
-    if(editorElem && formWithEditor) {
+    var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+
+    if(editorElem && editorInput) {
         let data = null;
-        if (formWithEditor.elements.text.value) {
+        if (editorInput.value) {
             try {
-                data = { blocks: JSON.parse(formWithEditor.elements.text.value) };
+                data = { blocks: JSON.parse(editorInput.value) };
             } catch(e) {
                 data = {
                     blocks: [
                         {
                             type: "paragraph",
                             data:{
-                                text: formWithEditor.elements.text.value
+                                text: editorInput.value
                             }
                         }
                     ]
@@ -41,23 +44,26 @@ export default () => {
             placeholder: 'Let`s add an awesome carrier text!' 
         });
 
-        formWithEditor.addEventListener('submit', e => {
-            e.preventDefault();
-            console.log('submit');
+        function syncInput(e) {
+            console.log(e)
             editor.save().then((outputData) => {
-                console.log('Article data: ', JSON.stringify(outputData.blocks));
+                console.log(outputData.blocks, 'Article data: ', JSON.stringify(outputData.blocks));
+                editorElem.classList.remove('invalid');
                 if (outputData.blocks.length) {
-                    let textInput = formWithEditor.elements.text;
-                    textInput.value = JSON.stringify(outputData.blocks);
-                    formWithEditor.submit();
+                    nativeInputValueSetter.call(editorInput, JSON.stringify(outputData.blocks));
+                    var ev = new Event('change', { bubbles: true});
+                    editorInput.dispatchEvent(ev);
                 } else {
-                    textInput = '';
+                    editorElem.classList.add('invalid');
+                    editorInput.value = '';
                     //TODO: add complete required field message
                     console.log('Fill all fields');
                 }
             }).catch((error) => {
                 console.log('Saving failed: ', error)
             });
-        });
+        }
+
+        editorElem.addEventListener('keydown', debounce(syncInput, 700));
     }
 }

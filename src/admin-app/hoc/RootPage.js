@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
 export default props => {
-    console.log('bread ', props)
+    
+    useEffect(() => {
+        document.title = props.title;
+    })
+
     return (
         <>
             <div className="spacer"></div>
@@ -14,11 +18,7 @@ export default props => {
                         : <strong key={breadcrumb.name}>{' > ' + breadcrumb.name}</strong>
                 })}
             </div>
-            <div className="row">
-                <div className="col">
-                    <h1>{props.title}</h1>
-                </div>
-            </div>
+            <h1>{props.title}</h1>
             {props.children}
         </>
     );

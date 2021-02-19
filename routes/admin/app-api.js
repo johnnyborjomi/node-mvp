@@ -4,8 +4,11 @@ const Admin = require('../../models/admin');
 const Vacancy = require('../../models/vacancy');
 const Subscibers = require('../../models/subscriber');
 const Applicant = require('../../models/applicant');
+const sendNewVacancyMail = require('../../emails/new-vacancy');
 
 const bcrypt = require('bcryptjs');
+
+///auth
 
 router.get('/auth/check', async (req, res) => {
     console.log(req.session);
@@ -68,9 +71,10 @@ router.post('/auth/login', async (req, res) => {
     }
 })
 
+///vacancies
+
 router.get('/vacancies', async (req, res) => {
     const vacancies = await Vacancy.find();
-    // const templData = JSON.parse(JSON.stringify(vacancies));
     const templData = [];
     vacancies.map(v => templData.push(v.toObject({getters: true})));
     res.send(
@@ -89,8 +93,35 @@ router.get('/vacancy/:id', async (req, res) => {
         res.status(404).send(
             JSON.stringify({error: true, message: 'Vacancy not found'})
         )
+    } 
+})
+
+router.post('/vacancy/add', async (req, res) => {
+    console.log('new vacancy: ', req.body)
+    try {
+        const data = req.body;
+        const vacancy = new Vacancy({
+            title: data.title,
+            salary: data.salary,
+            text: data.text,
+            locations: data.locations,
+            vacancyType: data.vacancyType,
+            createDate: new Date().toJSON()
+        });
+        await vacancy.save();
+        res.send(JSON.stringify({
+            success: true,
+            vacancyId: vacancy.id
+        }));
+
+        // await sendNewVacancyMail(vacancy);
+    } catch (e) {
+        console.log(e);
+        res.status(404).send(JSON.stringify({
+            success: false,
+            message: e.message
+        }));
     }
-    
 })
 
 router.post('/vacancy/delete', async (req, res) => {
@@ -105,7 +136,9 @@ router.post('/vacancy/delete', async (req, res) => {
             JSON.stringify({deleted: 'error', message: 'Something went wrong'})
         )
     }
-})
+});
+
+///subs
 
 router.get('/subscribers', async (req, res) => {
     const subs = await Subscibers.find();
@@ -116,6 +149,8 @@ router.get('/subscribers', async (req, res) => {
         JSON.stringify(templData.reverse())
     );
 });
+
+///applicants
 
 router.get('/applicants', async (req, res) => {
     const subs = await Applicant.find()

@@ -103,6 +103,10 @@ hr {
 
 .editorjs {
   border: 1px solid lightgrey;
+
+  &.invalid {
+    border-color: red;
+  }
 }
 
 .vacancy-content {
@@ -148,8 +152,18 @@ hr {
   }
 }
 
-.input-field > label {
-  transform: translateY(-14px) scale(0.8) !important;
+.input-field { 
+  & > label {
+    transform: translateY(-14px) scale(0.8) !important;
+  }
+
+  &.select {
+    margin-top: 1.5rem;
+
+    & > label {
+      transform: translateY(14px) scale(1) !important;
+    }
+  }
 }
 
 nav ul a.active {

@@ -1,25 +1,11 @@
 import React, {useState ,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import VacancyCard from '../Components/Vacancy-card.jsx'
+import withPageLoader from '../hoc/PageLoader';
 
-export default props => {
-    console.log(props)
-
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(async () => {
-        document.title = props.title;
-        const res = await fetch('/admin-api/vacancies');
-        const resData = await res.json();
-        setData(data => data.concat(resData));
-        setIsLoading(isLoading => isLoading = false);
-        console.log(resData);
-    }, []);
+const VacanciesPage = ({data}) => {
 
     return (
-        isLoading ?
-        null:
         <>
         <div className="row">
             <div className="col right">
@@ -39,3 +25,5 @@ export default props => {
         </>
     );
 }
+
+export default withPageLoader(VacanciesPage, 'vacancies');

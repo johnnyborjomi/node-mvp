@@ -9,6 +9,10 @@ const dateFromJSONDate = (jsonDate) => {
     return moment(jsonDate).format("Do MMMM YYYY");
 }
 
+const fullDateFromJSON = (jsonDate) => {
+    return moment(jsonDate).format("Do MMMM YYYY, h:mm:ss a");
+}
+
 const money = (money) => {
     const formatter = new Intl.NumberFormat('us-US', {
         currency: 'USD',
@@ -78,6 +82,7 @@ export {
     money,
     selectOptions,
     editorText,
+    fullDateFromJSON
 }
 
 

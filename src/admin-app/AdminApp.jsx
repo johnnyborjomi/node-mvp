@@ -66,9 +66,18 @@ export const AdminApp = () => {
                         <Route 
                             path="/vacancy/add" 
                             exact
-                            render={
-                                props => <VacancyAddPage {...props}/>
-                            } 
+                            render={props => {
+                                return (
+                                    <RootPage
+                                        title="Add New Vacancy"
+                                        breadcrumbs={[
+                                            {name: 'Vacancies', link: '/vacancies'},
+                                            {name: "Add Vacancy"}
+                                            ]}>
+                                        <VacancyAddPage {...props}/>
+                                    </RootPage>
+                                );
+                            }} 
                         />
                         <Route 
                             path="/vacancy/:id" 
