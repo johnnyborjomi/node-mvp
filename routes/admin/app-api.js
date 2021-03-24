@@ -106,6 +106,7 @@ router.post('/vacancy/add', async (req, res) => {
             text: data.text,
             locations: data.locations,
             vacancyType: data.vacancyType,
+            published: data.published,
             createDate: new Date().toJSON()
         });
         await vacancy.save();

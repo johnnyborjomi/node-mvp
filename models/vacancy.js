@@ -17,6 +17,9 @@ const vacancy = new Schema({
         type: String,
         required: true
     },
+    published: {
+        type: Boolean,
+    },
     locations: [String],
     vacancyType: String,
 })

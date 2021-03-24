@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import initEditor from '../Vendors/editor';
 import initSelect from '../Vendors/m-select';
 import Input from '../Components/Input.jsx';
+import Checkbox from '../Components/Checkbox.jsx';
 import Select from '../Components/Select.jsx';
 
 
@@ -69,7 +70,11 @@ export default props => {
     const onInputChange = e => {
         console.log('change: ', e.target.name);
         const newFormData = {...formData};
-        newFormData[e.target.name] = e.target.value;
+        if(e.target.type === 'checkbox') {
+            newFormData[e.target.name] = e.target.checked;
+        }else{
+            newFormData[e.target.name] = e.target.value
+        }
         setFormData(newFormData);
     } 
 
@@ -121,6 +126,12 @@ export default props => {
                     </p> : null
                 }
 
+                <Checkbox
+                     label="Published"
+                     name="published" 
+                     handler={debouncedInputChange}
+                />
+                <div className="spacer-md"></div>
                 <input onClick={submitHandler} type="submit" value="Post Vacancy" className="btn btn-primary"/>
             </form>
             <div className="spacer"></div>

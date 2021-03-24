@@ -38,9 +38,9 @@ export default props => {
         console.log(data)
         if(data.deleted === 'success') {
             setSuccess(data.message);
-            // setTimeout(() => {
-            //     props.history.push('/vacancies');
-            // }, 5000)
+            setTimeout(() => {
+                props.history.push('/vacancies');
+            }, 3000)
         }else{
             setError(data.message);
         }
@@ -65,7 +65,7 @@ export default props => {
                 : null
             }
             <p>
-            <Link className="" to={`/vacancies`}>Back to vacancies</Link>
+            <Link className="" to={`/vacancies`}>&lt; Back to vacancies</Link>
             </p>
             
         </>
