@@ -91,6 +91,7 @@ hr {
   background-color: lightgrey;
   border-radius: 4px;
   padding: 1px 5px;
+  margin: 0 1px;
 }
 
 .vacancy-type {
@@ -179,4 +180,10 @@ nav ul a.active {
     transform: translateY(0%);
     transition: transform .3s ease;
   }
+}
+
+.published {
+  border-radius: 3px;
+  padding: 3px;
+  color: #fff;
 }

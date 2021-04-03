@@ -96,6 +96,24 @@ router.get('/vacancy/:id', async (req, res) => {
     } 
 })
 
+router.post('/vacancy/edit', async (req, res) => {
+    try {
+        console.log('update: ', req.body);
+        const vacancy = await Vacancy.findByIdAndUpdate(req.body.id, {...req.body, createDate: new Date().toJSON()});
+        res.send(JSON.stringify({
+            success: true,
+            vacancyId: vacancy.id
+        }));
+    } catch(e) {
+        console.log(e);
+        res.status(404).send(JSON.stringify({
+            success: false,
+            message: e.message
+        }));
+    }
+    
+})
+
 router.post('/vacancy/add', async (req, res) => {
     console.log('new vacancy: ', req.body)
     try {

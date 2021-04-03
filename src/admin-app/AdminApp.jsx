@@ -4,10 +4,10 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import LoginPage from './Pages/Login-page.jsx';
 import DashPage from './Pages/Dash-page.jsx';
 import VacanciesPage from './Pages/Vacancies-page.jsx';
-import SingleVacancyPage from './Pages/Single-vacancy-page.jsx';
-import VacancyAddPage from './Pages/Vacancy-add.jsx';
-import VacancyDeletePage from './Pages/Vacancy-delete.jsx';
-import VacancyEditPage from './Pages/Vacancy-edit.jsx';
+import SingleVacancyPage from './Pages/V-single.jsx';
+import VacancyAddPage from './Pages/V-add.jsx';
+import VacancyDeletePage from './Pages/V-delete.jsx';
+import VacancyEditPage from './Pages/V-edit.jsx';
 import SubsPage from './Pages/Subs-page.jsx';
 import ApplicantsPage from './Pages/Applicants-page.jsx';
 import NotFoundPage from './Pages/Notfound-page.jsx';
@@ -96,9 +96,18 @@ export const AdminApp = () => {
                         <Route 
                             path="/vacancy/:id/edit" 
                             exact
-                            render={
-                                props => <VacancyEditPage {...props}/>
-                            } 
+                            render={props => {
+                                return (
+                                    <RootPage
+                                        title="Edit Vacancy"
+                                        breadcrumbs={[
+                                            {name: 'Vacancies', link: '/vacancies'},
+                                            {name: "Edit Vacancy"}
+                                            ]}>
+                                        <VacancyEditPage {...props}/>
+                                    </RootPage>
+                                );
+                            }} 
                         />
                         <Route 
                             path="/subscribers" 

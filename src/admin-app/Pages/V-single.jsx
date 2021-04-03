@@ -9,18 +9,18 @@ export default props => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(async () => {
-        document.title = props.title;
         const res = await fetch(`/admin-api/vacancy/${props.match.params.id}`);
         const resData = await res.json();
         console.log('data: ', resData);
         setData(resData);
-        console.log('data: ', data);
+        document.title = resData.title;
         setIsLoading(false);
     }, []);
 
     return (
         isLoading ?
-        null:
+        <span>Loading...</span>
+        :
         <>
         <div className="spacer">
             <Link to="/vacancies">Back to vacancies</Link>
@@ -61,6 +61,16 @@ export default props => {
                 }
             </div>
         </div>
+        <div className="row">
+            <div className="col s12">
+                {data.published ? 
+                    <span className="published green">Published</span>
+                    : 
+                    <span className="published red">Not published</span>
+                }
+            </div>
+        </div>
+        
         <div className="row">
             <div className="col s12">
                 <b>Salary: </b>

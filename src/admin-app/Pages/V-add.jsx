@@ -70,10 +70,17 @@ export default props => {
     const onInputChange = e => {
         console.log('change: ', e.target.name);
         const newFormData = {...formData};
-        if(e.target.type === 'checkbox') {
-            newFormData[e.target.name] = e.target.checked;
-        }else{
-            newFormData[e.target.name] = e.target.value
+        switch(e.target.name) {
+            case 'published':
+                newFormData[e.target.name] = e.target.checked;
+                break;
+            case 'location':
+                console.log(e.target.selectedOptions)
+                newFormData.locations = [...e.target.selectedOptions].map(opt => opt.value);
+                console.log(newFormData)
+                break;
+            default:
+                newFormData[e.target.name] = e.target.value
         }
         setFormData(newFormData);
     } 
@@ -101,6 +108,7 @@ export default props => {
                     options={selects.locations}
                     placeholder="Location"
                     name="location"
+                    multiple={true}
                     handler={debouncedInputChange}
                 />
                 <Select 

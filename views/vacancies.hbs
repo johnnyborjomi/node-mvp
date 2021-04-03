@@ -1,33 +1,36 @@
 <h1>Our Vacancies</h1>
 
 {{#if vacancies.length}}
-    {{#each vacancies }}
-        <div class="card hoverable">
-            <div class="card-image waves-effect waves-block waves-light">
-            </div>
-            <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">{{title}}<i class="material-icons right">more_vert</i></span>
-                <p class="right-align">Posted: {{dateFromJSONDate createDate}}</p>
-                {{#if locations.length}}
-                    <b>Locations: </b>
-                            {{#each locations}}
-                                <span class="location">{{this}}</span>
-                            {{/each}}
-                {{/if}}
-                <div class="spacer-xs"></div>
-                {{#if vacancyType}}
-                    <p class="vacancy-type">{{vacancyType}}</p>
-                {{/if}}
-                <div class="spacer-md"></div>
-                <p>Salary:<b> {{money salary}}</b></p>
-                <p><a href="/vacancies/{{id}}">Visit Page</a></p>
-            </div>
-            <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">{{title}}<i class="material-icons right">close</i></span>
-                <div class="vacancy-content">{{{editorText text}}}</div>
-            </div>
-        </div>
-    {{/each}}
+{{#each vacancies }}
+{{#if published}}
+<div class="card hoverable">
+    <div class="card-image waves-effect waves-block waves-light">
+    </div>
+    <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">{{title}}<i
+                class="material-icons right">more_vert</i></span>
+        <p class="right-align">Posted: {{dateFromJSONDate createDate}}</p>
+        {{#if locations.length}}
+        <b>Locations: </b>
+        {{#each locations}}
+        <span class="location">{{this}}</span>
+        {{/each}}
+        {{/if}}
+        <div class="spacer-xs"></div>
+        {{#if vacancyType}}
+        <p class="vacancy-type">{{vacancyType}}</p>
+        {{/if}}
+        <div class="spacer-md"></div>
+        <p>Salary:<b> {{money salary}}</b></p>
+        <p><a href="/vacancies/{{id}}">Visit Page</a></p>
+    </div>
+    <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">{{title}}<i class="material-icons right">close</i></span>
+        <div class="vacancy-content">{{{editorText text}}}</div>
+    </div>
+</div>
+{{/if}}
+{{/each}}
 {{else}}
 <p>No Avaliable Vacancies.</p>
 {{/if}}

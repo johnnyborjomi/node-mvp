@@ -40,6 +40,12 @@ export default ({vacancy}) => {
                 }
                 <p>Salary: <b>{money(vacancy.salary)}</b></p>
                 <div className="spacer-md"></div>
+                {vacancy.published ? 
+                    <span className="published green">Published</span>
+                    : 
+                    <span className="published red">Not published</span>
+                }
+                <div className="spacer-md"></div>
                 <div className="row">
                     <div className="col s2">
                         <Link 
