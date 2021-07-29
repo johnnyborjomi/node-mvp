@@ -44,6 +44,7 @@ router.post('/unsubscribe', async (req, res) => {
 
 router.post('/subscribe', subscribeValidators, async (req, res) => {
     console.log('body:' ,req.body, req);
+    const email = req.body.email;
     try {
         const error = validationResult(req);
         if (!error.isEmpty()) {
@@ -53,7 +54,7 @@ router.post('/subscribe', subscribeValidators, async (req, res) => {
             })
         }
         const subscriber = new Subscriber({
-            email: req.body.email,
+            email: email,
             createDate: new Date().toJSON()
         });
         await subscriber.save();
